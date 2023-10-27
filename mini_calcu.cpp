@@ -64,22 +64,21 @@ double subs_()
         return 0;
     }
 
-    if (a.front() == '-')
+    if (a.front() != '-')
     {
-        a.erase(0, 1);
-        sum -= stod(a.substr(0, a.find("-")));
+        sum += stod(a.substr(0, a.find("-")));
         a.erase(0, a.find("-") + 1);
     }
-    double s2 = 0;
-    if (a.find("-") != string ::npos)
-        s2 = stod(a.substr(0, a.find("-")));
+    else if (a.front() == '-')
+        a.erase(0, 1);
+
     while (1)
     {
 
         if (a.find("-") == string ::npos)
         {
             sum -= stod(a);
-            cout << "substraction value: " << sum + s2 * 2 << endl;
+            cout << "substraction value: " << sum << endl;
             return 0;
         }
         else
