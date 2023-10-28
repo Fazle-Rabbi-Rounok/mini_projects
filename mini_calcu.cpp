@@ -16,15 +16,17 @@ double sum_()
     double sum = 0;
     while (1)
     {
-        long found = a.find("+");
-        sum += stod(a.substr(0, found));
-        if (found == (a.rfind("+")))
+        if (a.find("+") == string::npos)
         {
-            a.erase(0, found + 1);
             sum += stod(a);
             break;
         }
-        a.erase(0, found + 1);
+        else
+        {
+            long found = a.find("+");
+            sum += stod(a.substr(0, found));
+            a.erase(0, found + 1);
+        }
     }
     cout << "Total sum: " << sum << endl;
 }
