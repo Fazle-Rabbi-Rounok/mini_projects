@@ -10,7 +10,7 @@ using namespace std;
 
 double sum_()
 {
-    cout << "To get the sum of n numbers.\nenter in the following formate: a+b+c+...n\n";
+    cout << "\nTo get the sum of n numbers.\nenter in the following formate: a+b+c+...n\n\n";
     string a;
     getline(cin, a);
     double sum = 0;
@@ -30,7 +30,7 @@ double sum_()
 }
 double subs_()
 {
-    cout << "To get the substraction of n numbers.\nenter in the following formate: a-b-c- ...n\n";
+    cout << "\nTo get the substraction of n numbers.\nenter in the following formate: a-b-c- ...n\n\n";
     string a;
     getline(cin, a);
     double sum = 0;
@@ -92,14 +92,14 @@ double subs_()
 double div_()
 {
     string a;
-    cout << "To divide a by b.\nenter in the following formate: a/b\n";
+    cout << "\nTo divide a by b.\nenter in the following formate: a/b\n\n";
     getline(cin, a);
     long long div = a.find("/");
     cout << "Quotient: " << stod(a.substr(0, div)) / stod(a.substr(div + 1)) << endl;
 }
 double multi_()
 {
-    cout << "To get the multiplication of n numbers.\nenter in the following formate: a*b*c*...n\n";
+    cout << "\nTo get the multiplication of n numbers.\nenter in the following formate: a*b*c*...n\n\n";
     string a;
     getline(cin, a);
     double sum = 1;
@@ -120,7 +120,7 @@ double multi_()
 double rem_()
 {
     string a;
-    cout << "To get the reminder of a by b.\nenter in the following formate: a%b\n";
+    cout << "\nTo get the reminder of a by b.\nenter in the following formate: a%b\n\n";
     getline(cin, a);
     long long div = a.find("%");
     cout << "Reminder :" << fmod(stod(a.substr(0, div)), stod(a.substr(div + 1))) << endl;
@@ -128,7 +128,7 @@ double rem_()
 double power()
 {
     string a;
-    cout << "To get a to the power b.\nenter in the following formate: a^b\n";
+    cout << "\nTo get a to the power b.\nenter in the following formate: a^b\n\n";
     getline(cin, a);
     long long div = a.find("^");
     cout << stod(a.substr(0, div)) << " to the power " << stod(a.substr(div + 1)) << " is: " << pow(stod(a.substr(0, div)), stod(a.substr(div + 1))) << endl;
@@ -136,14 +136,14 @@ double power()
 double rut()
 {
     string a;
-    cout << "to get nth root of x.\nenter in the following formate: x,n\n";
+    cout << "\nTo get nth root of x.\nenter in the following formate: x,n\n\n";
     getline(cin, a);
     long long div = a.find(",");
     cout << stod(a.substr(div + 1)) << "th root of " << stod(a.substr(0, div)) << " is: " << pow(stod(a.substr(0, div)), (1 / stod(a.substr(div + 1)))) << endl;
 }
 double fact()
 {
-    cout << "To get factorial of x.\nenter x: ";
+    cout << "\nTo get factorial of x.\nenter x: ";
     long long a;
     cin >> a;
     long long c = a;
@@ -158,14 +158,14 @@ double fact()
 double log_()
 {
     string a;
-    cout << "to get logarithm of x, where x is the argument & b is base.\nenter in the following formate: x,b\n";
+    cout << "\nTo get logarithm of x, where x is the argument & b is base.\nenter in the following formate: x,b\n\n";
     getline(cin, a);
     long long div = a.find(",");
     cout << "logarithm of " << stod(a.substr(0, div)) << " base " << stod(a.substr(div + 1)) << " is: " << log(stod(a.substr(0, div))) / (log(stod(a.substr(div + 1)))) << endl;
 }
 double eq_solve()
 {
-    cout << "To get the roots for aX^2+bX+c=0.\nenter a,b,c in the following formate: a b c\n";
+    cout << "\nTo get the roots for aX^2+bX+c=0.\nenter a,b,c in the following formate: a b c\n\n";
     double a, b, c;
     cin >> a >> b >> c;
     if (((b * b) - (4 * a * c)) >= 0)
@@ -205,12 +205,13 @@ int main()
         else if (a == 'e')
             eq_solve();
 
-        cout << "press y to continue, n to end the program" << endl;
+        cout << "\npress y to continue, n to end the program" << endl;
         char end;
         cin >> end;
         getchar();
         if (end == 'n')
             break;
     }
-    cout << "Thank you for using my calculator." << endl;
+    cout << "\nThanks for using my calculator.\n"
+         << endl;
 }
