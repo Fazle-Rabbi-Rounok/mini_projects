@@ -20,9 +20,9 @@ int main()
             str = "scissor";
         cout << "Enter your choice: ";
         cin >> s2;
-        cout << "computer chossed: " << str << "\nYon chossed: " << s2<<"\n";
+        cout << "computer chossed: " << str << "\nYon chossed: " << s2 << "\n";
         if (str == s2)
-            cout << "This round was a draw\n";
+            cout << "This round was a draw\n\n";
         else if (ra == 0 && s2 == "paper")
         {
             cout << "You won this round!\n\n";
