@@ -97,66 +97,77 @@ void straddp2(char stt[5][11], string str)
 }
 int main()
 {
-    char stt[5][11] = {' ', ' ', ' ', '|', ' ', ' ', ' ', '|', ' ', ' ', ' ', '-', '-', '-', ' ', '-', '-', '-', ' ', '-', '-', '-', ' ', ' ', ' ', '|', ' ', ' ', ' ', '|', ' ', ' ', ' ', '-', '-', '-', ' ', '-', '-', '-', ' ', '-', '-', '-', ' ', ' ', ' ', '|', ' ', ' ', ' ', '|', ' ', ' ', ' '};
-
-    cout << "\n\nThis is a tic-tac-toe game.\nThe positions of the boxes are defined as 1-9, starting from the left side of the first row.You need to choose a number to put your mark. whoever makes a line of 3 boxes first, wins the game.\n\n";
-    st pl1, pl2, str;
-    int i = 1;
-    pri(stt);
     while (1)
     {
+        char stt[5][11] = {' ', ' ', ' ', '|', ' ', ' ', ' ', '|', ' ', ' ', ' ', '-', '-', '-', ' ', '-', '-', '-', ' ', '-', '-', '-', ' ', ' ', ' ', '|', ' ', ' ', ' ', '|', ' ', ' ', ' ', '-', '-', '-', ' ', '-', '-', '-', ' ', '-', '-', '-', ' ', ' ', ' ', '|', ' ', ' ', ' ', '|', ' ', ' ', ' '};
 
-         while (1)
-        {
-            cout << "player 1's choice: ";
-            cin >> str;
-            if (pl1.find(str.back()) != string ::npos || pl2.find(str.back()) != string ::npos)
-            {
-                cout << "\nthis box is already taken, please choose another box.\n";
-            }
-            else
-                break;
-        }
-        straddp1(stt, str);
+        cout << "\n\nThis is a tic-tac-toe game.\nThe positions of the boxes are defined as 1-9, starting from the left side of the first row.You need to choose a number to put your mark. whoever makes a line of 3 boxes first, wins the game.\n\n";
+        st pl1, pl2, str;
+        int i = 1;
         pri(stt);
-        pl1 += str;
-        if (i > 2)
-        {
-            if ((pl1.find("1") != st ::npos && pl1.find("2") != st ::npos && pl1.find("3") != st ::npos) || (pl1.find("4") != st ::npos && pl1.find("5") != st ::npos && pl1.find("6") != st ::npos) || (pl1.find("7") != st ::npos && pl1.find("9") != st ::npos && pl1.find("8") != st ::npos) || (pl1.find("1") != st ::npos && pl1.find("4") != st ::npos && pl1.find("7") != st ::npos) || (pl1.find("2") != st ::npos && pl1.find("5") != st ::npos && pl1.find("8") != st ::npos) || (pl1.find("3") != st ::npos && pl1.find("6") != st ::npos && pl1.find("9") != st ::npos) || (pl1.find("1") != st ::npos && pl1.find("5") != st ::npos && pl1.find("9") != st ::npos) || (pl1.find("3") != st ::npos && pl1.find("5") != st ::npos && pl1.find("7") != st ::npos))
-            {
-                cout << "\nplayer 1 wins !\n\n";
-                break;
-            }
-        }
-        if (i == 9)
-        {
-            cout << "\ngame over ! No one wins this round.\n\n";
-            break;
-        }
-        i++;
         while (1)
         {
-            cout << "player 2's choice: ";
-            cin >> str;
-            if (pl1.find(str.back()) != string ::npos || pl2.find(str.back()) != string ::npos)
+
+            while (1)
             {
-                cout << "\nthis box is already taken, please choose another box.\n";
+                cout << "player 1's choice: ";
+                cin >> str;
+                if (pl1.find(str.back()) != string ::npos || pl2.find(str.back()) != string ::npos)
+                {
+                    cout << "\nthis box is already taken, please choose another box.\n";
+                }
+                else
+                    break;
             }
-            else
+            straddp1(stt, str);
+            pri(stt);
+            pl1 += str;
+            if (i > 2)
+            {
+                if ((pl1.find("1") != st ::npos && pl1.find("2") != st ::npos && pl1.find("3") != st ::npos) || (pl1.find("4") != st ::npos && pl1.find("5") != st ::npos && pl1.find("6") != st ::npos) || (pl1.find("7") != st ::npos && pl1.find("9") != st ::npos && pl1.find("8") != st ::npos) || (pl1.find("1") != st ::npos && pl1.find("4") != st ::npos && pl1.find("7") != st ::npos) || (pl1.find("2") != st ::npos && pl1.find("5") != st ::npos && pl1.find("8") != st ::npos) || (pl1.find("3") != st ::npos && pl1.find("6") != st ::npos && pl1.find("9") != st ::npos) || (pl1.find("1") != st ::npos && pl1.find("5") != st ::npos && pl1.find("9") != st ::npos) || (pl1.find("3") != st ::npos && pl1.find("5") != st ::npos && pl1.find("7") != st ::npos))
+                {
+                    cout << "\nplayer 1 wins !\n\n";
+                    break;
+                }
+            }
+            if (i == 9)
+            {
+                cout << "\ngame over ! No one wins this round.\n\n";
                 break;
+            }
+            i++;
+            while (1)
+            {
+                cout << "player 2's choice: ";
+                cin >> str;
+                if (pl1.find(str.back()) != string ::npos || pl2.find(str.back()) != string ::npos)
+                {
+                    cout << "\nthis box is already taken, please choose another box.\n";
+                }
+                else
+                    break;
+            }
+            straddp2(stt, str);
+            pri(stt);
+            pl2 += str;
+            if (i > 2)
+            {
+                if ((pl2.find("1") != st ::npos && pl2.find("2") != st ::npos && pl2.find("3") != st ::npos) || (pl2.find("4") != st ::npos && pl2.find("5") != st ::npos && pl2.find("6") != st ::npos) || (pl2.find("7") != st ::npos && pl2.find("9") != st ::npos && pl2.find("8") != st ::npos) || (pl2.find("1") != st ::npos && pl2.find("4") != st ::npos && pl2.find("7") != st ::npos) || (pl2.find("2") != st ::npos && pl2.find("5") != st ::npos && pl2.find("8") != st ::npos) || (pl2.find("3") != st ::npos && pl2.find("6") != st ::npos && pl2.find("9") != st ::npos) || (pl2.find("1") != st ::npos && pl2.find("5") != st ::npos && pl2.find("9") != st ::npos) || (pl2.find("3") != st ::npos && pl2.find("5") != st ::npos && pl2.find("7") != st ::npos))
+                {
+                    cout << "\nplayer 2 wins !\n\n";
+                    break;
+                }
+            }
+            i++;
         }
-        straddp2(stt, str);
-        pri(stt);
-        pl2 += str;
-        if (i > 2)
+        cout << "want to play again?\npress y to play again, n to end the program.\n";
+        getchar();
+        char a = getchar();
+        if (a == 'n')
         {
-            if ((pl2.find("1") != st ::npos && pl2.find("2") != st ::npos && pl2.find("3") != st ::npos) || (pl2.find("4") != st ::npos && pl2.find("5") != st ::npos && pl2.find("6") != st ::npos) || (pl2.find("7") != st ::npos && pl2.find("9") != st ::npos && pl2.find("8") != st ::npos) || (pl2.find("1") != st ::npos && pl2.find("4") != st ::npos && pl2.find("7") != st ::npos) || (pl2.find("2") != st ::npos && pl2.find("5") != st ::npos && pl2.find("8") != st ::npos) || (pl2.find("3") != st ::npos && pl2.find("6") != st ::npos && pl2.find("9") != st ::npos) || (pl2.find("1") != st ::npos && pl2.find("5") != st ::npos && pl2.find("9") != st ::npos) || (pl2.find("3") != st ::npos && pl2.find("5") != st ::npos && pl2.find("7") != st ::npos))
-            {
-                cout << "\nplayer 2 wins !\n\n";
-                break;
-            }
+            cout << "\nThanks for playing my game.\n\n";
+            break;
         }
-        i++;
     }
     return 0;
 }
