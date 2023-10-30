@@ -36,16 +36,80 @@ int com(const void *aa, const void *bb)
 {
     return *(const int *)aa - *(const int *)bb;
 }
-
+void pri(char st[5][11])
+{
+    printf("\n");
+    int aa = 0, bb = 0;
+    while (aa < 5)
+    {
+        bb = 0;
+        while (bb < 11)
+        {
+            printf("%c", st[aa][bb]);
+            bb++;
+        }
+        printf("\n");
+        aa++;
+    }
+    printf("\n");
+}
+void straddp1(char stt[5][11], string str)
+{
+    if (str == "1")
+        stt[0][1] = 'o';
+    else if (str == "2")
+        stt[0][5] = 'o';
+    else if (str == "3")
+        stt[0][9] = 'o';
+    else if (str == "4")
+        stt[2][1] = 'o';
+    else if (str == "5")
+        stt[2][5] = 'o';
+    else if (str == "6")
+        stt[2][9] = 'o';
+    else if (str == "7")
+        stt[4][1] = 'o';
+    else if (str == "8")
+        stt[4][5] = 'o';
+    else
+        stt[4][9] = 'o';
+}
+void straddp2(char stt[5][11], string str)
+{
+    if (str == "1")
+        stt[0][1] = '*';
+    else if (str == "2")
+        stt[0][5] = '*';
+    else if (str == "3")
+        stt[0][9] = '*';
+    else if (str == "4")
+        stt[2][1] = '*';
+    else if (str == "5")
+        stt[2][5] = '*';
+    else if (str == "6")
+        stt[2][9] = '*';
+    else if (str == "7")
+        stt[4][1] = '*';
+    else if (str == "8")
+        stt[4][5] = '*';
+    else
+        stt[4][9] = '*';
+}
 int main()
 {
+    char stt[5][11] = {' ', ' ', ' ', '|', ' ', ' ', ' ', '|', ' ', ' ', ' ', '-', '-', '-', ' ', '-', '-', '-', ' ', '-', '-', '-', ' ', ' ', ' ', '|', ' ', ' ', ' ', '|', ' ', ' ', ' ', '-', '-', '-', ' ', '-', '-', '-', ' ', '-', '-', '-', ' ', ' ', ' ', '|', ' ', ' ', ' ', '|', ' ', ' ', ' '};
+
     cout << "\n\nThis is a tic-tac-toe game.\nThe positions of the boxes are defined as 1-9, starting from the left side of the first row.You need to choose a number to put your mark. whoever makes a line of 3 boxes first, wins the game.\n\n";
     st pl1, pl2, str;
     int i = 1;
+    pri(stt);
     while (1)
     {
+        
         cout << "player 1's choice: ";
         cin >> str;
+        straddp1(stt, str);
+        pri(stt);
         pl1 += str;
         if (i > 2)
         {
@@ -63,6 +127,8 @@ int main()
         i++;
         cout << "player 2's choice: ";
         cin >> str;
+        straddp2(stt, str);
+        pri(stt);
         pl2 += str;
         if (i > 2)
         {
