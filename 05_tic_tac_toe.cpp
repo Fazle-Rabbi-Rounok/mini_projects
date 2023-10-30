@@ -105,9 +105,18 @@ int main()
     pri(stt);
     while (1)
     {
-        
-        cout << "player 1's choice: ";
-        cin >> str;
+
+         while (1)
+        {
+            cout << "player 1's choice: ";
+            cin >> str;
+            if (pl1.find(str.back()) != string ::npos || pl2.find(str.back()) != string ::npos)
+            {
+                cout << "\nthis box is already taken, please choose another box.\n";
+            }
+            else
+                break;
+        }
         straddp1(stt, str);
         pri(stt);
         pl1 += str;
@@ -125,8 +134,17 @@ int main()
             break;
         }
         i++;
-        cout << "player 2's choice: ";
-        cin >> str;
+        while (1)
+        {
+            cout << "player 2's choice: ";
+            cin >> str;
+            if (pl1.find(str.back()) != string ::npos || pl2.find(str.back()) != string ::npos)
+            {
+                cout << "\nthis box is already taken, please choose another box.\n";
+            }
+            else
+                break;
+        }
         straddp2(stt, str);
         pri(stt);
         pl2 += str;
