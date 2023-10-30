@@ -116,6 +116,8 @@ int main()
                 {
                     cout << "\nthis box is already taken, please choose another box.\n";
                 }
+                else if (stoll(str) > 9 || stoll(str) < 1)
+                    cout << "\nnot a valid box number, please enter between 1-9.\n";
                 else
                     break;
             }
@@ -144,6 +146,8 @@ int main()
                 {
                     cout << "\nthis box is already taken, please choose another box.\n";
                 }
+                else if (stoll(str) > 9 || stoll(str) < 1)
+                    cout << "\nnot a valid box number, please enter between 1-9.\n";
                 else
                     break;
             }
