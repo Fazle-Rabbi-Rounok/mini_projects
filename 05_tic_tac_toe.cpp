@@ -1,41 +1,10 @@
-#include <algorithm>
-#include <array>
-#include <bitset>
-#include <cassert>
-#include <climits>
-#include <cstdint>
-#include <cmath>
-#include <complex>
-#include <cstdio>
-#include <cstdlib>
 #include <cstring>
-#include <functional>
-#include <iomanip>
 #include <iostream>
-#include <map>
-#include <memory>
-#include <numeric>
-#include <queue>
-#include <random>
-#include <set>
-#include <stack>
 #include <string>
-#include <unordered_set>
-#include <unordered_map>
-#include <vector>
-#include <cctype>
-#include <ctime>
 
 using namespace std;
-using ll = long long;
 using st = string;
-using d = double;
-using ld = long double;
 
-int com(const void *aa, const void *bb)
-{
-    return *(const int *)aa - *(const int *)bb;
-}
 void pri(char st[5][11])
 {
     printf("\n");
@@ -56,44 +25,44 @@ void pri(char st[5][11])
 void straddp1(char stt[5][11], string str)
 {
     if (str == "1")
-        stt[0][1] = 'o';
+        stt[0][1] = 'O';
     else if (str == "2")
-        stt[0][5] = 'o';
+        stt[0][5] = 'O';
     else if (str == "3")
-        stt[0][9] = 'o';
+        stt[0][9] = 'O';
     else if (str == "4")
-        stt[2][1] = 'o';
+        stt[2][1] = 'O';
     else if (str == "5")
-        stt[2][5] = 'o';
+        stt[2][5] = 'O';
     else if (str == "6")
-        stt[2][9] = 'o';
+        stt[2][9] = 'O';
     else if (str == "7")
-        stt[4][1] = 'o';
+        stt[4][1] = 'O';
     else if (str == "8")
-        stt[4][5] = 'o';
+        stt[4][5] = 'O';
     else
-        stt[4][9] = 'o';
+        stt[4][9] = 'O';
 }
 void straddp2(char stt[5][11], string str)
 {
     if (str == "1")
-        stt[0][1] = '*';
+        stt[0][1] = 'X';
     else if (str == "2")
-        stt[0][5] = '*';
+        stt[0][5] = 'X';
     else if (str == "3")
-        stt[0][9] = '*';
+        stt[0][9] = 'X';
     else if (str == "4")
-        stt[2][1] = '*';
+        stt[2][1] = 'X';
     else if (str == "5")
-        stt[2][5] = '*';
+        stt[2][5] = 'X';
     else if (str == "6")
-        stt[2][9] = '*';
+        stt[2][9] = 'X';
     else if (str == "7")
-        stt[4][1] = '*';
+        stt[4][1] = 'X';
     else if (str == "8")
-        stt[4][5] = '*';
+        stt[4][5] = 'X';
     else
-        stt[4][9] = '*';
+        stt[4][9] = 'X';
 }
 int main()
 {
@@ -110,14 +79,14 @@ int main()
 
             while (1)
             {
-                cout << "player 1's choice: ";
+                cout << "player 1's turn: ";
                 cin >> str;
-                if (pl1.find(str.back()) != string ::npos || pl2.find(str.back()) != string ::npos)
+                if (stoll(str) > 9 || stoll(str) < 1)
+                    cout << "\nnot a valid box number, please enter between 1-9.\n";
+                else if (pl1.find(str.back()) != string ::npos || pl2.find(str.back()) != string ::npos)
                 {
                     cout << "\nthis box is already taken, please choose another box.\n";
                 }
-                else if (stoll(str) > 9 || stoll(str) < 1)
-                    cout << "\nnot a valid box number, please enter between 1-9.\n";
                 else
                     break;
             }
@@ -140,14 +109,14 @@ int main()
             i++;
             while (1)
             {
-                cout << "player 2's choice: ";
+                cout << "player 2's turn: ";
                 cin >> str;
-                if (pl1.find(str.back()) != string ::npos || pl2.find(str.back()) != string ::npos)
+                if (stoll(str) > 9 || stoll(str) < 1)
+                    cout << "\nnot a valid box number, please enter between 1-9.\n";
+                else if (pl1.find(str.back()) != string ::npos || pl2.find(str.back()) != string ::npos)
                 {
                     cout << "\nthis box is already taken, please choose another box.\n";
                 }
-                else if (stoll(str) > 9 || stoll(str) < 1)
-                    cout << "\nnot a valid box number, please enter between 1-9.\n";
                 else
                     break;
             }
