@@ -71,6 +71,11 @@ int main()
         char stt[5][11] = {' ', ' ', ' ', '|', ' ', ' ', ' ', '|', ' ', ' ', ' ', '-', '-', '-', ' ', '-', '-', '-', ' ', '-', '-', '-', ' ', ' ', ' ', '|', ' ', ' ', ' ', '|', ' ', ' ', ' ', '-', '-', '-', ' ', '-', '-', '-', ' ', '-', '-', '-', ' ', ' ', ' ', '|', ' ', ' ', ' ', '|', ' ', ' ', ' '};
 
         cout << "\n\nThis is a tic-tac-toe game.\nThe positions of the boxes are defined as 1-9, starting from the left side of the first row.You need to choose a number to put your mark. whoever makes a line of 3 boxes first, wins the game.\n\n";
+        string p1, p2;
+        cout << "enter player 1 name: ";
+        getline(cin, p1);
+        cout << "enter player 2 name: ";
+        getline(cin, p2);
         st pl1, pl2, str;
         int i = 1;
         pri(stt);
@@ -97,7 +102,8 @@ int main()
             {
                 if ((pl1.find("1") != st ::npos && pl1.find("2") != st ::npos && pl1.find("3") != st ::npos) || (pl1.find("4") != st ::npos && pl1.find("5") != st ::npos && pl1.find("6") != st ::npos) || (pl1.find("7") != st ::npos && pl1.find("9") != st ::npos && pl1.find("8") != st ::npos) || (pl1.find("1") != st ::npos && pl1.find("4") != st ::npos && pl1.find("7") != st ::npos) || (pl1.find("2") != st ::npos && pl1.find("5") != st ::npos && pl1.find("8") != st ::npos) || (pl1.find("3") != st ::npos && pl1.find("6") != st ::npos && pl1.find("9") != st ::npos) || (pl1.find("1") != st ::npos && pl1.find("5") != st ::npos && pl1.find("9") != st ::npos) || (pl1.find("3") != st ::npos && pl1.find("5") != st ::npos && pl1.find("7") != st ::npos))
                 {
-                    cout << "\nplayer 1 wins !\n\n";
+                    cout << '\n'
+                         << p1 << " wins the game !\n\n";
                     break;
                 }
             }
@@ -127,7 +133,8 @@ int main()
             {
                 if ((pl2.find("1") != st ::npos && pl2.find("2") != st ::npos && pl2.find("3") != st ::npos) || (pl2.find("4") != st ::npos && pl2.find("5") != st ::npos && pl2.find("6") != st ::npos) || (pl2.find("7") != st ::npos && pl2.find("9") != st ::npos && pl2.find("8") != st ::npos) || (pl2.find("1") != st ::npos && pl2.find("4") != st ::npos && pl2.find("7") != st ::npos) || (pl2.find("2") != st ::npos && pl2.find("5") != st ::npos && pl2.find("8") != st ::npos) || (pl2.find("3") != st ::npos && pl2.find("6") != st ::npos && pl2.find("9") != st ::npos) || (pl2.find("1") != st ::npos && pl2.find("5") != st ::npos && pl2.find("9") != st ::npos) || (pl2.find("3") != st ::npos && pl2.find("5") != st ::npos && pl2.find("7") != st ::npos))
                 {
-                    cout << "\nplayer 2 wins !\n\n";
+                    cout << '\n'
+                         << p2 << " wins the game !\n\n";
                     break;
                 }
             }
