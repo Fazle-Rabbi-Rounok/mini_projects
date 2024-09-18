@@ -17,10 +17,39 @@ void addemployee()
     cin >> temporary.name;
     cout << "enter employee id: ";
     cin >> temporary.id;
+    while (temporary.id < 0)
+    {
+        cout << "\nid must be grater than equal 0.\nenter employee id: ";
+        cin >> temporary.id;
+    }
+    while (1)
+    {
+        int f = 1;
+        for (auto &a : employee)
+            if (temporary.id == a.id)
+            {
+                cout << "\nid must be unique.\nenter employee id: ";
+                cin >> temporary.id;
+                f = 0;
+                break;
+            }
+        if (f)
+            break;
+    }
     cout << "enter employee age: ";
     cin >> temporary.age;
+    while (temporary.age < 1)
+    {
+        cout << "\nage must be grater than 0.\nenter employee age: ";
+        cin >> temporary.age;
+    }
     cout << "enter employee salary: ";
     cin >> temporary.salary;
+    while (temporary.salary < 1)
+    {
+        cout << "\nsalary must be grater than 0.\nenter employee salary: ";
+        cin >> temporary.salary;
+    }
     cin.ignore();
     cout << "enter employee post: ";
     getline(cin, temporary.post);
@@ -71,12 +100,15 @@ void removeemployee()
 }
 void viewallemployee()
 {
-    for (auto &a : employee)
-        cout << "\nname: " << a.name << "\n"
-             << "id: " << a.id << "\n"
-             << "age: " << a.age << "\n"
-             << "post: " << a.post << "\n"
-             << "salary: " << a.salary << "\n\n";
+    if (employee.size() == 0)
+        cout << "\nNo employees found !\n\n";
+    else
+        for (auto &a : employee)
+            cout << "\nname: " << a.name << "\n"
+                 << "id: " << a.id << "\n"
+                 << "age: " << a.age << "\n"
+                 << "post: " << a.post << "\n"
+                 << "salary: " << a.salary << "\n\n";
 }
 void update_post()
 {
@@ -111,6 +143,11 @@ void update_salary()
         {
             cout << "enter new salary: ";
             cin >> a.salary;
+            while (a.salary < 1)
+            {
+                cout << "\nsalary must be grater than 0.\nenter employee salary: ";
+                cin >> a.salary;
+            }
             cout << "employee id " << tem << "'s salary has been updated !\n\n";
             f = 1;
             break;
@@ -123,15 +160,12 @@ int main()
 {
     cout << "Assalamu alaikum wa rohmatulloh!\nWelcome to your employee management system !\nChoose any of the options given below:\n1. Add employee\n2. View employee\n3. Remove employee\n4. Update employee post\n5. Update employee salary\nChoose: ";
     int i;
-there:
-{
     cin >> i;
-    if (i < 1 || i > 5)
+    while (i < 1 || i > 5)
     {
-        cout << "invalid option chosen !\n";
-        goto there;
+        cout << "invalid option chosen !\nchoose: ";
+        cin >> i;
     }
-}
     while (i != 6)
     {
         if (i == 1)
