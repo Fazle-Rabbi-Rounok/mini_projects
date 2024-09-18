@@ -154,7 +154,7 @@ void update_salary()
         }
     }
     if (!f)
-        cout << "\nemployee " << tem << " not found!\n\n";
+        cout << "\nemployee id " << tem << " not found!\n\n";
 }
 int main()
 {
