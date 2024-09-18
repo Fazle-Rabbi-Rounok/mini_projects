@@ -13,7 +13,7 @@ vector<company> employee;
 void addemployee()
 {
     company temporary;
-    cout << "enter employee name: ";
+    cout << "\nenter employee name: ";
     cin >> temporary.name;
     cout << "enter employee id: ";
     cin >> temporary.id;
@@ -67,7 +67,7 @@ void removeemployee()
             cnt++;
     }
     if (!f)
-        cout << "\nemployee id " << tem << " not found!\n";
+        cout << "\nemployee id " << tem << " not found!\n\n";
 }
 void viewallemployee()
 {
@@ -76,7 +76,7 @@ void viewallemployee()
              << "id: " << a.id << "\n"
              << "age: " << a.age << "\n"
              << "post: " << a.post << "\n"
-             << "salary: " << a.salary << "\n";
+             << "salary: " << a.salary << "\n\n";
 }
 void update_post()
 {
@@ -91,6 +91,7 @@ void update_post()
         {
             cout << "enter new post: ";
             getline(cin, a.post);
+            cout << "employee id " << tem << " is now " << a.post << "\n\n";
             f = 1;
             break;
         }
@@ -110,23 +111,32 @@ void update_salary()
         {
             cout << "enter new salary: ";
             cin >> a.salary;
+            cout << "employee id " << tem << "'s salary has been updated !\n\n";
             f = 1;
             break;
         }
     }
     if (!f)
-        cout << "\nemployee " << tem << " not found!\n";
+        cout << "\nemployee " << tem << " not found!\n\n";
 }
 int main()
 {
     cout << "Assalamu alaikum wa rohmatulloh!\nWelcome to your employee management system !\nChoose any of the options given below:\n1. Add employee\n2. View employee\n3. Remove employee\n4. Update employee post\n5. Update employee salary\nChoose: ";
     int i;
+there:
+{
     cin >> i;
+    if (i < 1 || i > 5)
+    {
+        cout << "invalid option chosen !\n";
+        goto there;
+    }
+}
     while (i != 6)
     {
         if (i == 1)
             addemployee();
-        if (i == 2)
+        else if (i == 2)
         {
         here:
         {
@@ -138,17 +148,21 @@ int main()
                 viewallemployee();
             else
             {
-                cout << "wrong entry !\n";
+                cout << "invalid option !\n";
                 goto here;
             }
         }
         }
-        if (i == 3)
+        else if (i == 3)
             removeemployee();
-        if (i == 4)
+        else if (i == 4)
             update_post();
+        else if (i == 5)
+            update_salary();
+        else
+            cout << "\ninvalid option !\n\n";
         cout << "1. Add employee\n2. View employee\n3. Remove employee\n4. Update employee post\n5. Update employee salary\n6.exit\nChoose: ";
         cin >> i;
     }
-    cout << "Thanks for using the employee management system !";
+    cout << "\nThanks for using the employee management system !";
 }
