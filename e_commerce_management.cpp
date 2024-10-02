@@ -1,20 +1,23 @@
 #include <bits/stdc++.h>
 using namespace std;
 class Rshop;
+vector<class purchase> purchase_hstry;
+vector<class customer> customer_list;
+vector<class products> all_prod;
+vector<class seller> seller_list;
 class purchase
 {
 };
-vector<purchase> purchase_hstry;
-
 class products
 {
 };
-vector<products> all_prod;
+
 class seller
 {
-
-    int id;
     string name;
+    int age;
+    string contact;
+    string address;
     string user_name;
     string log_pass;
     friend class Rshop;
@@ -22,18 +25,58 @@ class seller
 public:
     void seller_dashboard()
     {
-        string user, logpass;
-        cin.ignore();
-        cout << "please log in:\nenter user name: ";
-        getline(cin, user);
-        cout << "enter password: ";
-        getline(cin, logpass);
-        if (user_name == user && log_pass == logpass)
-            seldashboard();
-        else
-            cout << "wrong username or password\n";
+        int choose;
+        cout << "1.log in\n2.sign up\n3.exit\nchoose: ";
+        cin >> choose;
+        while (choose < 1 || choose > 3)
+            cout << "invlid input, please try again.\nchoose: ", cin >> choose;
+        if (choose == 1)
+            seller_log_in();
+        else if (choose == 2)
+            seller_reg();
     }
-    void seldashboard() {}
+    void seller_reg()
+    {
+        seller tem;
+        cin.ignore();
+        cout << "enter your name: ";
+        getline(cin, tem.name);
+        cout << "enter your age: ";
+        cin >> tem.age;
+        cin.ignore();
+        cout << "enter your contact number: ";
+        getline(cin, tem.contact);
+        cout << "enter your address: ";
+        getline(cin, tem.address);
+        cout << "enter your email: ";
+        getline(cin, tem.user_name);
+        cout << "enter your password: ";
+        getline(cin, tem.log_pass);
+        cout << "thanks for signing up to our website. use your email and password to log into our website.\n";
+        seller_list.push_back(tem);
+    }
+    void seller_log_in()
+    {
+        seller tem;
+        cin.ignore();
+        cout << "enter your email: ";
+        getline(cin, tem.user_name);
+        cout << "enter your password: ";
+        getline(cin, tem.log_pass);
+        for (auto &a : seller_list)
+            if (tem.user_name == a.user_name && tem.log_pass == a.log_pass)
+            {
+                cout << "you have logged in\n";
+                seldashboard(a);
+                break;
+            }
+        cout << "username or password doesnt match, please try again\n";
+        seller_dashboard();
+    }
+    void seldashboard(seller &tem)
+    {
+        cout << "welcome " << tem.name << " \n";
+    }
     void add_product()
     {
     }
@@ -50,17 +93,52 @@ public:
     {
     }
 };
-vector<seller> seller_list;
 
 class customer
 {
-public:
-    int id;
+
     string name;
-    string log_in;
-    string login_pass;
+    int age;
+    string contact;
+    string address;
+    string user_name;
+    string pass;
     friend class Rshop;
 
+public:
+    void customer_dashboard()
+    {
+        int choose;
+        cout << "1.log in\n2.sign up\n3.exit\nchoose: ";
+        cin >> choose;
+        while (choose < 1 || choose > 3)
+            cout << "invlid input, please try again.\nchoose: ", cin >> choose;
+        if (choose == 1)
+            customer_log_in();
+        else if (choose == 2)
+            customer_reg();
+    }
+    void customer_log_in() {}
+    void customer_reg()
+    {
+        customer tem;
+        cin.ignore();
+        cout << "enter your name: ";
+        getline(cin, tem.name);
+        cout << "enter your age: ";
+        cin >> tem.age;
+        cin.ignore();
+        cout << "enter your contact number: ";
+        getline(cin, tem.contact);
+        cout << "enter your address: ";
+        getline(cin, tem.address);
+        cout << "enter your email: ";
+        getline(cin, tem.user_name);
+        cout << "enter your password: ";
+        getline(cin, tem.pass);
+        cout << "thanks for signing up to our website. use your email and password to log into our website.\n";
+        customer_list.push_back(tem);
+    }
     void search_product()
     {
     }
@@ -77,7 +155,6 @@ public:
     {
     }
 };
-vector<customer> customer_list;
 
 class Rshop
 {
@@ -89,13 +166,14 @@ public:
     {
         for (auto &a : seller_list)
         {
-            cout << "name: " << a.name << "\nid: " << a.id << "\n";
+            cout << "name: " << a.name << "\nage: " << a.age << "\ncontact number: " << a.contact << "\naddress: " << a.address << endl
+                 << endl;
         }
     }
     void view_customers()
     {
         for (auto &a : customer_list)
-            cout << "name: " << a.name << "\nid: " << a.id << "\n";
+            cout << "name: " << a.name << "\nid: " << a.age << "\n";
     }
     void admin_dashboard()
     {
@@ -164,6 +242,7 @@ int main()
 {
     Rshop obj;
     seller sobj;
+    customer cobj;
     cout << "1.log in as admin\n2.log in as a seller\n3.log in as customer\nchoose: ";
     int choose;
     cin >> choose;
@@ -178,7 +257,7 @@ int main()
             sobj.seller_dashboard();
             break;
         case 3:
-            //  customer_dashboard();
+            cobj.customer_dashboard();
             break;
         default:
             cout << "invalid input\n ";
