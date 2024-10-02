@@ -1,13 +1,39 @@
 #include <bits/stdc++.h>
 using namespace std;
+class Rshop;
+class purchase
+{
+};
+vector<purchase> purchase_hstry;
+
+class products
+{
+};
+vector<products> all_prod;
 class seller
 {
-public:
+
     int id;
     string name;
-    string log_in;
+    string user_name;
     string log_pass;
+    friend class Rshop;
 
+public:
+    void seller_dashboard()
+    {
+        string user, logpass;
+        cin.ignore();
+        cout << "please log in:\nenter user name: ";
+        getline(cin, user);
+        cout << "enter password: ";
+        getline(cin, logpass);
+        if (user_name == user && log_pass == logpass)
+            seldashboard();
+        else
+            cout << "wrong username or password\n";
+    }
+    void seldashboard() {}
     void add_product()
     {
     }
@@ -33,6 +59,7 @@ public:
     string name;
     string log_in;
     string login_pass;
+    friend class Rshop;
 
     void search_product()
     {
@@ -52,15 +79,6 @@ public:
 };
 vector<customer> customer_list;
 
-class purchase
-{
-};
-vector<purchase> purchase_hstry;
-
-class products
-{
-};
-vector<products> all_prod;
 class Rshop
 {
     string user_name = "admin";
@@ -88,11 +106,11 @@ public:
         cout << "enter password: ";
         getline(cin, logpass);
         if (user_name == user && log_pass == logpass)
-            dashboard();
+            admdashboard();
         else
             cout << "wrong username or password\n";
     }
-    void dashboard()
+    void admdashboard()
     {
         cout << "welcome to admin dashboar:  \n\nplease choose any option given below: \n1.view sellers\n2.view customers\n3. ban someone\n4.exit\nchoose: ";
         int choose;
@@ -145,6 +163,7 @@ public:
 int main()
 {
     Rshop obj;
+    seller sobj;
     cout << "1.log in as admin\n2.log in as a seller\n3.log in as customer\nchoose: ";
     int choose;
     cin >> choose;
@@ -156,7 +175,7 @@ int main()
             obj.admin_dashboard();
             break;
         case 2:
-            // seller_dashboard();
+            sobj.seller_dashboard();
             break;
         case 3:
             //  customer_dashboard();
