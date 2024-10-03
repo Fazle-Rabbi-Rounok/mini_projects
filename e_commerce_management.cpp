@@ -10,6 +10,12 @@ class purchase
 };
 class products
 {
+    int id;
+    string name;
+    int price;
+    int quantity;
+    string owner_mail;
+    friend seller;
 };
 
 class seller
@@ -76,9 +82,51 @@ public:
     void seldashboard(seller &tem)
     {
         cout << "welcome " << tem.name << " \n";
+        cout << "1. view poducts\n2. add products\n\3. remove products\n4.update stock\n5. update price\n6. exit\nchoose: ";
+        int choose;
+        cin >> choose;
+        while (choose != 6)
+        {
+            switch (choose)
+            {
+            case 1:
+                view_products();
+                break;
+            case 2:
+                add_product(tem);
+                break;
+            case 3:
+                remove_product();
+                break;
+            case 4:
+                stock_manage();
+                break;
+            case 5:
+                price_update();
+                break;
+            default:
+                cout << "invalid input\n ";
+                break;
+            }
+            cout << "1. view poducts\n2. add products\n\3. remove products\n4.update stock\n5. update price\n6. exit\nchoose: ";
+            cin >> choose;
+        }
     }
-    void add_product()
+    void add_product(seller &t)
     {
+        products tem;
+        tem.owner_mail = t.user_name;
+        cout << "enter product id: ";
+        cin >> tem.id;
+        cin.ignore();
+        cout << "enter product name: ";
+        getline(cin, tem.name);
+        cout << "enter product price: ";
+        cin >> tem.price;
+        cout << "enter product quantity: ";
+        cin >> tem.quantity;
+        all_prod.push_back(tem);
+        seldashboard(t);
     }
     void stock_manage()
     {
@@ -86,7 +134,7 @@ public:
     void price_update()
     {
     }
-    void profit()
+    void view_products()
     {
     }
     void remove_product()
@@ -190,10 +238,10 @@ public:
     }
     void admdashboard()
     {
-        cout << "welcome to admin dashboar:  \n\nplease choose any option given below: \n1.view sellers\n2.view customers\n3. ban someone\n4.exit\nchoose: ";
+        cout << "welcome to admin dashboar:  \n\nplease choose any option given below: \n1.view sellers\n2.view customers\n3. ban someone\n4. view products\n5. view purchase history\n6.exit\nchoose: ";
         int choose;
         cin >> choose;
-        while (choose != 4)
+        while (choose != 6)
         {
             switch (choose)
             {
@@ -205,6 +253,12 @@ public:
                 break;
             case 3:
                 ban_();
+                break;
+            case 4:
+                view_products();
+                break;
+            case 5:
+                view_history();
                 break;
             default:
                 cout << "invalid input\n ";
@@ -236,6 +290,24 @@ public:
     void ban_customer()
     {
     }
+    void view_products()
+    {
+        cout << "1. all products\n2.single product\n3.seller specified products\n4.exit\nchoose: ";
+        int choose;
+        cin >> choose;
+        while (choose < 1 || choose > 4)
+            cout << "invalid input\nchoose: ", cin >> choose;
+        if (choose == 1)
+            view_all_prod();
+        else if (choose == 2)
+            view_single_prod();
+        else if (choose == 3)
+            view_seller_prod();
+    }
+    void view_history() {}
+    void view_all_prod(){}
+    void  view_single_prod(){}
+    void view_seller_prod(){}
 };
 
 int main()
@@ -243,7 +315,7 @@ int main()
     Rshop obj;
     seller sobj;
     customer cobj;
-    cout << "1.log in as admin\n2.log in as a seller\n3.log in as customer\nchoose: ";
+    cout << "1.log in as admin\n2.log in as a seller\n3.log in as customer\n4. exit\nchoose: ";
     int choose;
     cin >> choose;
     while (choose != 4)
