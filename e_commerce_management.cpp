@@ -14,7 +14,7 @@ class products
     string name;
     int price;
     int quantity;
-    string owner_mail;
+    string owner_name;
     friend seller;
 };
 
@@ -81,6 +81,10 @@ public:
     }
     void seldashboard(seller &tem)
     {
+        vector<products> tem_pro;
+        for (auto &a : all_prod)
+            if (a.owner_name == tem.user_name)
+                tem_pro.push_back(a);
         cout << "welcome " << tem.name << " \n";
         cout << "1. view poducts\n2. add products\n\3. remove products\n4.update stock\n5. update price\n6. exit\nchoose: ";
         int choose;
@@ -115,7 +119,7 @@ public:
     void add_product(seller &t)
     {
         products tem;
-        tem.owner_mail = t.user_name;
+        tem.owner_name = t.user_name;
         cout << "enter product id: ";
         cin >> tem.id;
         cin.ignore();
@@ -128,8 +132,10 @@ public:
         all_prod.push_back(tem);
         seldashboard(t);
     }
-    void stock_manage()
+    void stock_manage(seller &t)
     {
+        cout << "enter product id: ";
+        for (auto)
     }
     void price_update()
     {
@@ -305,9 +311,9 @@ public:
             view_seller_prod();
     }
     void view_history() {}
-    void view_all_prod(){}
-    void  view_single_prod(){}
-    void view_seller_prod(){}
+    void view_all_prod() {}
+    void view_single_prod() {}
+    void view_seller_prod() {}
 };
 
 int main()
