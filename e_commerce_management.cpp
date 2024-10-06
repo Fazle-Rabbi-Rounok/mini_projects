@@ -5,6 +5,7 @@ vector<class purchase> purchase_hstry;
 vector<class customer> customer_list;
 vector<class products> all_prod;
 vector<class seller> seller_list;
+vector<pair<string, vector<pair<int, int>>>> cart_list;
 class purchase
 {
 };
@@ -17,6 +18,7 @@ class products
     string owner_name;
     friend seller;
     friend Rshop;
+    friend customer;
 };
 
 class seller
@@ -132,6 +134,8 @@ public:
         tem.owner_name = t.user_name;
         cout << "enter product id: ";
         cin >> tem.id;
+        while (tem.id < 1)
+            cout << "id must be greater than 0.\nenter id again: ", cin >> tem.id;
         int f;
         while (f)
         {
@@ -295,10 +299,10 @@ public:
     void customer_dash(customer &tem)
     {
         cout << "welcome " << tem.name << " \n";
-        cout << "1. search poducts\n2. buy products\n4. payment\n5. update price\n6. exit\nchoose: ";
+        cout << "1. search poducts\n2. go to cart\n3. purchase history\n4. exit\nchoose: ";
         int choose;
         cin >> choose;
-        while (choose != 6)
+        while (choose != 4)
         {
             switch (choose)
             {
@@ -306,16 +310,10 @@ public:
                 search_product(tem);
                 break;
             case 2:
-                buy_product(tem);
+                cart(tem);
                 break;
             case 3:
-                add_to_cart(tem);
-                break;
-            case 4:
-                payment(tem);
-                break;
-            case 5:
-                order_details(tem);
+                // pur_histry(tem);
                 break;
             default:
                 cout << "invalid input\n ";
@@ -358,20 +356,163 @@ public:
         cout << "thanks for signing up to our website. use your user name and password to log into our website.\n";
         customer_list.push_back(tem);
     }
-    void search_product()
+    void search_product(customer &t)
+    {
+        string tem;
+        int f = 0;
+        cout << "search for your desired product by their name: ";
+        cin.ignore();
+        getline(cin, tem);
+        for (auto &a : all_prod)
+        {
+            if ((a.name).find(tem) != string::npos)
+                cout << "id: " << a.id << "    name: " << a.name << "    price: " << a.price << "    available: " << a.quantity << endl;
+            f = 1;
+        }
+        if (!f)
+            cout << "no products found having \"" << tem << "\" in it\n";
+        cout << "enter 0 to search again\nenter -1 to exit or\nenter product id to add to cart\nenter: ";
+        int choose;
+        cin >> choose;
+        if (choose == 0)
+            search_product(t);
+        else if (choose == -1)
+            customer_dash(t);
+        else
+        {
+            int quan;
+            cout << "enter quantity: ";
+            cin >> quan;
+            add_to_cart(choose, t, quan);
+            cout << "product added to your cart.\n";
+            search_product(t);
+        }
+    }
+    void add_to_cart(int ch, customer &t, int q)
+    {
+        int f = 0;
+        for (auto &[a, b] : cart_list)
+        {
+            if (a == t.user_name)
+                b.push_back({ch, q});
+            f = 1;
+            break;
+        }
+        if (!f)
+            cart_list.push_back({t.user_name, {{ch, q}}});
+    }
+    void pur_hstry(customer &t)
     {
     }
-    void buy_product()
+    void cart(customer &t)
     {
+        show_cart(t);
+        cout << "1.remove from cart\n2.add more product\n3. confirm buy\n4.exit\nchoose: ";
+        int chose;
+        cin >> chose;
+        while (chose < 1 || chose > 4)
+        {
+            cout << "invalid input, choose again: ";
+            cin >> chose;
+        }
+        while (chose != 4)
+        {
+            switch (chose)
+            {
+            case 1:
+                remove_from_cart(t);
+                show_cart(t);
+                break;
+            case 2:
+                search_product(t);
+                show_cart(t);
+                break;
+            case 3:
+                buy(t);
+            default:
+                cout << "invalid input.\n1.remove from cart\n2.add more product\n3. confirm buy\n4.exit\nchoose: ";
+            }
+        }
     }
-    void add_to_cart()
+    void show_cart(customer &t)
     {
+        cout << "your cart list\n\n";
+        for (auto &[a, b] : cart_list)
+            if (a == t.user_name)
+            {
+                for (auto &c : b)
+                {
+                    for (auto &d : all_prod)
+                    {
+                        if (d.id == c.first)
+                            cout << "id: " << d.id << "    name: " << d.name << "    price: " << d.price << "    quantity: " << c.second << endl;
+                    }
+                }
+            }
     }
-    void payment()
+    void remove_from_cart(customer &t)
     {
+        int iid;
+        cout << "enter product id from your cart: ";
+        cin >> iid;
+        int f = 0;
+        for (auto &[a, b] : cart_list)
+
+            if (t.user_name == a)
+            {
+                int cnt = 0;
+                for (auto &c : b)
+                {
+                    if (c.first == iid)
+                    {
+                        b.erase(b.begin() + cnt);
+                        cout << "product removed from your cart.\n";
+                        f = 1;
+                        break;
+                    }
+                    else
+                        cnt++;
+                }
+                if (f)
+                    break;
+                else
+                {
+                    cout << "product was not found in your cart.\n";
+                    break;
+                }
+            }
     }
-    void order_details()
+    void buy(customer &t)
     {
+        long long cost = 0;
+        cout << "you are buying \n";
+        for (auto &[a, b] : cart_list)
+            if (a == t.user_name)
+            {
+                for (auto &c : b)
+                {
+                    cost += c.second * c.first;
+                    cout << c.second << " ";
+                    for (auto &q : all_prod)
+                        if (c.first == q.id)
+                        {
+                            cout << q.name << endl;
+                            break;
+                        }
+                }
+                break;
+            }
+        cout << "total bill: " << cost << " taka" << endl
+             << "thanks for purchasing.\n";
+        int cnt = 0;
+        for (auto &[a, b] : cart_list)
+            if (a == t.user_name)
+            {
+                cart_list.erase(cart_list.begin() + cnt);
+                break;
+            }
+            else
+                cnt++;
     }
 };
 
