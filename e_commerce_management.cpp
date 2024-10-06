@@ -92,8 +92,11 @@ public:
                 seldashboard(a);
                 break;
             }
-        cout << "username or password doesnt match, please try again\n";
-        seller_dashboard();
+            else
+            {
+                cout << "username or password doesnt match, please try again\n";
+                seller_dashboard();
+            }
     }
     void seldashboard(seller &tem)
     {
@@ -158,7 +161,6 @@ public:
         cin >> tem.quantity;
         all_prod.push_back(tem);
         cout << "product added successfully.\n";
-        seldashboard(t);
     }
     void stock_manage(seller &t)
     {
@@ -336,7 +338,7 @@ public:
         getline(cin, tem.contact);
         cout << "enter your address: ";
         getline(cin, tem.address);
-        cout << "enter your email: ";
+        cout << "enter your user name: ";
         getline(cin, tem.user_name);
         int f;
         while (f)
@@ -374,18 +376,22 @@ public:
         cout << "enter 0 to search again\nenter -1 to exit or\nenter product id to add to cart\nenter: ";
         int choose;
         cin >> choose;
-        if (choose == 0)
-            search_product(t);
-        else if (choose == -1)
-            customer_dash(t);
-        else
+        while (choose != -1)
         {
-            int quan;
-            cout << "enter quantity: ";
-            cin >> quan;
-            add_to_cart(choose, t, quan);
-            cout << "product added to your cart.\n";
-            search_product(t);
+            if (choose == 0)
+                search_product(t);
+            else if (choose == -1)
+                customer_dash(t);
+            else
+            {
+                int quan;
+                cout << "enter quantity: ";
+                cin >> quan;
+                add_to_cart(choose, t, quan);
+                cout << "product added to your cart.\n";
+            }
+            cout << "enter 0 to search again\nenter -1 to exit or\nenter product id to add to cart\nenter: ";
+            cin >> choose;
         }
     }
     void add_to_cart(int ch, customer &t, int q)
@@ -429,6 +435,7 @@ public:
                 break;
             case 3:
                 buy(t);
+                break;
             default:
                 cout << "invalid input.\n1.remove from cart\n2.add more product\n3. confirm buy\n4.exit\nchoose: ";
             }
