@@ -253,7 +253,6 @@ public:
 
 class customer
 {
-
     string name;
     int age;
     string contact;
@@ -275,7 +274,57 @@ public:
         else if (choose == 2)
             customer_reg();
     }
-    void customer_log_in() {}
+    void customer_log_in()
+    {
+        customer tem;
+        cin.ignore();
+        cout << "enter your user name: ";
+        getline(cin, tem.user_name);
+        cout << "enter your password: ";
+        getline(cin, tem.pass);
+        for (auto &a : customer_list)
+            if (tem.user_name == a.user_name && tem.pass == a.pass)
+            {
+                cout << "login successfull.\n";
+                customer_dash(a);
+                break;
+            }
+        cout << "username or password doesnt match, please try again\n";
+        customer_dashboard();
+    }
+    void customer_dash(customer &tem)
+    {
+        cout << "welcome " << tem.name << " \n";
+        cout << "1. search poducts\n2. buy products\n4. payment\n5. update price\n6. exit\nchoose: ";
+        int choose;
+        cin >> choose;
+        while (choose != 6)
+        {
+            switch (choose)
+            {
+            case 1:
+                search_product(tem);
+                break;
+            case 2:
+                buy_product(tem);
+                break;
+            case 3:
+                add_to_cart(tem);
+                break;
+            case 4:
+                payment(tem);
+                break;
+            case 5:
+                order_details(tem);
+                break;
+            default:
+                cout << "invalid input\n ";
+                break;
+            }
+            cout << "1. view poducts\n2. add products\n3. remove products\n4.update stock\n5. update price\n6. exit\nchoose: ";
+            cin >> choose;
+        }
+    }
     void customer_reg()
     {
         customer tem;
@@ -291,9 +340,22 @@ public:
         getline(cin, tem.address);
         cout << "enter your email: ";
         getline(cin, tem.user_name);
+        int f;
+        while (f)
+        {
+            f = 0;
+            for (auto &a : customer_list)
+                if (a.user_name == tem.user_name)
+                {
+                    cout << "user name already taken. please enter a new user name: ";
+                    getline(cin, tem.user_name);
+                    f = 1;
+                    break;
+                }
+        }
         cout << "enter your password: ";
         getline(cin, tem.pass);
-        cout << "thanks for signing up to our website. use your email and password to log into our website.\n";
+        cout << "thanks for signing up to our website. use your user name and password to log into our website.\n";
         customer_list.push_back(tem);
     }
     void search_product()
