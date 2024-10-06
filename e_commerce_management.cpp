@@ -16,6 +16,7 @@ class products
     int quantity;
     string owner_name;
     friend seller;
+    friend Rshop;
 };
 
 class seller
@@ -54,25 +55,38 @@ public:
         getline(cin, tem.contact);
         cout << "enter your address: ";
         getline(cin, tem.address);
-        cout << "enter your email: ";
+        cout << "enter your user name: ";
         getline(cin, tem.user_name);
+        int f;
+        while (f)
+        {
+            f = 0;
+            for (auto &a : seller_list)
+                if (a.user_name == tem.user_name)
+                {
+                    cout << "user name already taken. please enter a new user name: ";
+                    getline(cin, tem.user_name);
+                    f = 1;
+                    break;
+                }
+        }
         cout << "enter your password: ";
         getline(cin, tem.log_pass);
-        cout << "thanks for signing up to our website. use your email and password to log into our website.\n";
+        cout << "thanks for signing up to our website. use your user name and password to log into our website.\n";
         seller_list.push_back(tem);
     }
     void seller_log_in()
     {
         seller tem;
         cin.ignore();
-        cout << "enter your email: ";
+        cout << "enter your user name: ";
         getline(cin, tem.user_name);
         cout << "enter your password: ";
         getline(cin, tem.log_pass);
         for (auto &a : seller_list)
             if (tem.user_name == a.user_name && tem.log_pass == a.log_pass)
             {
-                cout << "you have logged in\n";
+                cout << "login successfull.\n";
                 seldashboard(a);
                 break;
             }
@@ -81,12 +95,8 @@ public:
     }
     void seldashboard(seller &tem)
     {
-        vector<products> tem_pro;
-        for (auto &a : all_prod)
-            if (a.owner_name == tem.user_name)
-                tem_pro.push_back(a);
         cout << "welcome " << tem.name << " \n";
-        cout << "1. view poducts\n2. add products\n\3. remove products\n4.update stock\n5. update price\n6. exit\nchoose: ";
+        cout << "1. view poducts\n2. add products\n3. remove products\n4. update stock\n5. update price\n6. exit\nchoose: ";
         int choose;
         cin >> choose;
         while (choose != 6)
@@ -94,25 +104,25 @@ public:
             switch (choose)
             {
             case 1:
-                view_products();
+                view_products(tem);
                 break;
             case 2:
                 add_product(tem);
                 break;
             case 3:
-                remove_product();
+                remove_product(tem);
                 break;
             case 4:
-                stock_manage();
+                stock_manage(tem);
                 break;
             case 5:
-                price_update();
+                price_update(tem);
                 break;
             default:
                 cout << "invalid input\n ";
                 break;
             }
-            cout << "1. view poducts\n2. add products\n\3. remove products\n4.update stock\n5. update price\n6. exit\nchoose: ";
+            cout << "1. view poducts\n2. add products\n3. remove products\n4.update stock\n5. update price\n6. exit\nchoose: ";
             cin >> choose;
         }
     }
@@ -122,6 +132,19 @@ public:
         tem.owner_name = t.user_name;
         cout << "enter product id: ";
         cin >> tem.id;
+        int f;
+        while (f)
+        {
+            f = 0;
+            for (auto &a : all_prod)
+                if (a.id == tem.id)
+                {
+                    cout << "product id not available. Enter a new id: ";
+                    cin >> tem.id;
+                    f = 1;
+                    break;
+                }
+        }
         cin.ignore();
         cout << "enter product name: ";
         getline(cin, tem.name);
@@ -130,21 +153,101 @@ public:
         cout << "enter product quantity: ";
         cin >> tem.quantity;
         all_prod.push_back(tem);
+        cout << "product added successfully.\n";
         seldashboard(t);
     }
     void stock_manage(seller &t)
     {
         cout << "enter product id: ";
-        for (auto)
+        int iid, f = 0;
+        cin >> iid;
+        for (auto &a : all_prod)
+            if (a.id == iid && t.user_name == a.owner_name)
+            {
+                cout << "enter re stock amount: ";
+                cin >> a.quantity;
+                cout << "stock updated successfull.\n";
+                f = 1;
+                break;
+            }
+        if (!f)
+            cout << "product id not found or the the product doesnt belong to you\n";
     }
-    void price_update()
+    void price_update(seller &t)
     {
+        cout << "enter product id: ";
+        int pric, f = 0;
+        cin >> pric;
+        for (auto &a : all_prod)
+            if (a.id == pric && t.user_name == a.owner_name)
+            {
+                cout << "enter new price: ";
+                cin >> a.price;
+                cout << "price updated successfull.\n";
+                f = 1;
+                break;
+            }
+        if (!f)
+            cout << "product id not found or the the product doesnt belong to you\n";
     }
-    void view_products()
+    void view_products(seller &t)
     {
+        int choose;
+        cout << "1. single product\n2. all products\n3.exit\nchoose: ";
+        cin >> choose;
+        while (choose < 1 || choose > 3)
+            cout << "invlid input, please try again.\nchoose: ", cin >> choose;
+        if (choose == 1)
+            view_single_prod(t);
+        else if (choose == 2)
+            view_all_prod(t);
     }
-    void remove_product()
+    void view_single_prod(seller &t)
     {
+        cout << "enter product id: ";
+        int i, f = 0;
+        cin >> i;
+        for (auto &a : all_prod)
+        {
+            if (a.id == i && a.owner_name == t.user_name)
+                cout << "name: " << a.name << "\nid: " << a.id << "\nprice: " << a.price << "\nstock available: " << a.quantity << "\n";
+            f = 1;
+            break;
+        }
+        if (!f)
+            cout << "product id not found or the the product doesnt belong to you\n";
+    }
+    void view_all_prod(seller &t)
+    {
+        int f = 0;
+        for (auto &a : all_prod)
+        {
+            if (a.owner_name == t.user_name)
+                cout << "name: " << a.name << "\nid: " << a.id << "\nprice: " << a.price << "\nstock available: " << a.quantity << "\n";
+            f = 1;
+        }
+        if (!f)
+            cout << "no products were found\n";
+    }
+    void remove_product(seller &t)
+    {
+        cout << "enter product id: ";
+        int i, f = 0, cnt = 0;
+        cin >> i;
+        for (auto &a : all_prod)
+        {
+            if (a.id == i && a.owner_name == t.user_name)
+            {
+                all_prod.erase(all_prod.begin() + cnt);
+                cout << "product removed successfully\n";
+                f = 1;
+                break;
+            }
+            else
+                cnt++;
+        }
+        if (!f)
+            cout << "product id not found or the the product doesnt belong to you\n";
     }
 };
 
@@ -276,7 +379,29 @@ public:
     }
     void ban_seller()
     {
-        cout << "es\n";
+        cout << "enter seller user name: ";
+        cin.ignore();
+        string s;
+        getline(cin, s);
+        int f = 0, cnt = 0;
+        for (auto &a : seller_list)
+            if (s == a.user_name)
+            {
+                seller_list.erase(seller_list.begin() + cnt);
+                cout << "seller banned sucessfully\n";
+                f = 1;
+                break;
+            }
+            else
+                cnt++;
+        if (!f)
+            cout << "seller not found.\n";
+        else
+        {
+            for (int i = 0; i < all_prod.size(); i++)
+                if (all_prod[i].owner_name == s)
+                    all_prod.erase(all_prod.begin() + i), i--;
+        }
     }
     void ban_()
     {
@@ -311,9 +436,48 @@ public:
             view_seller_prod();
     }
     void view_history() {}
-    void view_all_prod() {}
-    void view_single_prod() {}
-    void view_seller_prod() {}
+    void view_all_prod()
+    {
+        int f = 0;
+        for (auto &a : all_prod)
+        {
+            cout << "owner: " << a.owner_name << "\nname: " << a.name << "\nid: " << a.id << "\nprice: " << a.price << "\nstock available: " << a.quantity << "\n";
+            f = 1;
+        }
+        if (!f)
+            cout << "no products were found.\n";
+    }
+    void view_single_prod()
+    {
+        cout << "enter product id: ";
+        int i, f = 0;
+        cin >> i;
+        for (auto &a : all_prod)
+        {
+            if (a.id == i)
+                cout << "owner: " << a.owner_name << "\nname: " << a.name << "\nid: " << a.id << "\nprice: " << a.price << "\nstock available: " << a.quantity << "\n";
+            f = 1;
+            break;
+        }
+        if (!f)
+            cout << "product id not found.\n";
+    }
+    void view_seller_prod()
+    {
+        cout << "enter seller user name: ";
+        int f = 0;
+        string tem;
+        cin.ignore();
+        getline(cin, tem);
+        for (auto &a : all_prod)
+        {
+            if (a.owner_name == tem)
+                cout << "\nname: " << a.name << "\nid: " << a.id << "\nprice: " << a.price << "\nstock available: " << a.quantity << "\n";
+            f = 1;
+        }
+        if (!f)
+            cout << "no products found for the seller user name.\n";
+    }
 };
 
 int main()
@@ -321,9 +485,15 @@ int main()
     Rshop obj;
     seller sobj;
     customer cobj;
-    cout << "1.log in as admin\n2.log in as a seller\n3.log in as customer\n4. exit\nchoose: ";
+    cout << "1.enter as admin\n2.enter as a seller\n3.enter as customer\nchoose: ";
     int choose;
     cin >> choose;
+    while (choose < 1 || choose > 3)
+    {
+        cout << "invalid input.\n"
+             << "1.enter as admin\n2.enter as a seller\n3.enter as customer\nchoose: ";
+        cin >> choose;
+    }
     while (choose != 4)
     {
         switch (choose)
@@ -341,7 +511,7 @@ int main()
             cout << "invalid input\n ";
             break;
         }
-        cout << "1.log in as admin\n2.log in as a seller\n3.log in as customer\nchoose: ";
+        cout << "1.enter as admin\n2.enter as a seller\n3.enter as customer\n4. exit\nchoose: ";
         cin >> choose;
     }
 }
