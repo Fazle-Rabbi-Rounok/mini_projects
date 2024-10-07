@@ -265,7 +265,8 @@ public:
         for (auto &a : all_prod)
         {
             if (a.owner_name == t.user_name)
-                cout << "name: " << a.name << "\nid: " << a.id << "\nprice: " << a.price << "\nstock available: " << a.quantity << "\n"<<"- - -\n";
+                cout << "name: " << a.name << "\nid: " << a.id << "\nprice: " << a.price << "\nstock available: " << a.quantity << "\n"
+                     << "- - -\n";
             f = 1;
         }
         if (!f)
@@ -432,14 +433,16 @@ public:
         cout << "\nenter 0 to search again\nenter -1 to return or\nenter product id to add to cart\nenter: ";
         int choose;
         cin >> choose;
-        while (choose != -1)
+        while (1)
         {
-            if (choose == 0)
-                search_product(t);
-            else if (choose == -1)
-                customer_dash(t);
-            else
+            switch (choose)
             {
+            case 1:
+                search_product(t);
+                break;
+            case -1:
+                break;
+            default:
                 int quan;
                 cout << "\nenter quantity: ";
                 cin >> quan;
@@ -453,7 +456,10 @@ public:
                 }
                 add_to_cart(choose, t, quan);
                 cout << "\nproduct added to your cart.\n";
+                break;
             }
+            if (choose == -1)
+                break;
             cout << "\nenter 0 to search again\nenter -1 to return or\nenter product id to add to cart\nenter: ";
             cin >> choose;
         }
