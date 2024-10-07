@@ -6,6 +6,17 @@ vector<class customer> customer_list;
 vector<class products> all_prod;
 vector<class seller> seller_list;
 map<string, vector<pair<int, int>>> cart_list;
+void save_cart()
+{
+    ofstream file6("cart.txt");
+    if (file6.is_open())
+    {
+        for (auto &[a, b] : cart_list)
+            for (auto &[c, d] : b)
+                file6 << c << " " << d << " " << a << ",\n";
+    }
+    file6.close();
+}
 class purchase
 {
     string user_name;
@@ -16,7 +27,19 @@ class purchase
     int cost;
     friend customer;
     friend Rshop;
-    friend file_handle;
+    friend class file_handle;
+
+public:
+    void save_purchase()
+    {
+        ofstream file("purchase.txt");
+        if (file.is_open())
+        {
+            for (auto &a : purchase_hstry)
+                file << a.id << " " << a.quantity << " " << a.cost << " " << a.name << ", " << a.user_name << ", " << a.p_time << "*\n";
+        }
+        file.close();
+    }
 };
 class products
 {
@@ -28,7 +51,7 @@ class products
     friend seller;
     friend Rshop;
     friend customer;
-    friend file_handle;
+    friend class file_handle;
 };
 
 class seller
@@ -40,7 +63,7 @@ class seller
     string user_name;
     string log_pass;
     friend class Rshop;
-    friend file_handle;
+    friend class file_handle;
 
 public:
     void seller_dashboard()
@@ -98,7 +121,7 @@ public:
         getline(cin, tem.log_pass);
         cout << "\nthanks for signing up to our website. use your username and password to log into our website.\n";
         seller_list.push_back(tem);
-        fobj.save_seller();
+        save_seller();
     }
     void seller_log_in()
     {
@@ -188,7 +211,7 @@ public:
         cin >> tem.quantity;
         all_prod.push_back(tem);
         cout << "\nproduct added successfully.\n";
-        fobj.save_product();
+        save_product();
     }
     void stock_manage(seller &t)
     {
@@ -201,7 +224,7 @@ public:
                 cout << "enter re stock amount: ";
                 cin >> a.quantity;
                 cout << "\nstock updated successfull.\n";
-                fobj.save_product();
+                save_product();
                 f = 1;
                 break;
             }
@@ -219,7 +242,7 @@ public:
                 cout << "enter new price: ";
                 cin >> a.price;
                 cout << "\nprice updated successfully.\n";
-                fobj.save_product();
+                save_product();
                 f = 1;
                 break;
             }
@@ -290,7 +313,7 @@ public:
             {
                 all_prod.erase(all_prod.begin() + cnt);
                 cout << "\nproduct removed successfully\n";
-                fobj.save_product();
+                save_product();
                 f = 1;
                 break;
             }
@@ -299,6 +322,26 @@ public:
         }
         if (!f)
             cout << "\nproduct not found.\n";
+    }
+    void save_seller()
+    {
+        ofstream file("seller.txt");
+        if (file.is_open())
+        {
+            for (auto &a : seller_list)
+                file << a.user_name << ", " << a.age << " " << a.name << ", " << a.contact << ", " << a.address << "* " << a.log_pass << ",\n";
+        }
+        file.close();
+    }
+    void save_product()
+    {
+        ofstream file("product.txt");
+        if (file.is_open())
+        {
+            for (auto &a : all_prod)
+                file << a.id << " " << a.price << " " << a.quantity << " " << a.name << ", " << a.owner_name << ",\n";
+        }
+        file.close();
     }
 };
 
@@ -311,9 +354,20 @@ class customer
     string user_name;
     string pass;
     friend class Rshop;
-    friend file_handle;
+    friend class file_handle;
 
 public:
+    void save_purchase()
+    {
+        ofstream file("purchase.txt");
+        if (file.is_open())
+        {
+            for (auto &a : purchase_hstry)
+                file << a.id << " " << a.quantity << " " << a.cost << " " << a.name << ", " << a.user_name << ", " << a.p_time << "*\n";
+        }
+        file.close();
+    }
+
     void customer_dashboard()
     {
         int choose;
@@ -421,9 +475,11 @@ public:
         getline(cin, tem.pass);
         cout << "\nthanks for signing up to our website. use your username and password to log into our website.\n";
         customer_list.push_back(tem);
-        fobj.save_customer();
+        save_customer();
     }
     void search_product(customer &t)
+    {
+    here:
     {
         string tem;
         int f = 0;
@@ -434,11 +490,14 @@ public:
         for (auto &a : all_prod)
         {
             if ((a.name).find(tem) != string::npos)
+            {
                 cout << "id: " << a.id << "    name: " << a.name << "    price: " << a.price << "    available: " << a.quantity << endl;
-            f = 1;
+                f = 1;
+            }
         }
         if (!f)
             cout << "\nno products found having \"" << tem << "\" in it\n";
+    }
         cout << "\nenter 0 to search again\nenter -1 to return or\nenter product id to add to cart\nenter: ";
         int choose;
         cin >> choose;
@@ -446,8 +505,8 @@ public:
         {
             switch (choose)
             {
-            case 1:
-                search_product(t);
+            case 0:
+                goto here;
                 break;
             case -1:
                 break;
@@ -464,7 +523,7 @@ public:
                     break;
                 }
                 add_to_cart(choose, t, quan);
-                fobj.save_cart();
+                save_cart();
                 cout << "\nproduct added to your cart.\n";
                 break;
             }
@@ -541,13 +600,15 @@ public:
                     for (auto &d : all_prod)
                     {
                         if (d.id == c.first)
+                        {
                             cout << "id: " << d.id << "    name: " << d.name << "    price: " << d.price << "    quantity: " << c.second << endl;
-                        f = 1;
+                            f = 1;
+                        }
                     }
                 }
             }
         if (!f)
-            cout << "\nno products were found in your cart.\n";
+            cout << "no products were found in your cart.\n";
     }
     void remove_from_cart(customer &t)
     {
@@ -565,7 +626,7 @@ public:
                     {
                         b.erase(b.begin() + cnt);
                         cout << "\nproduct removed from your cart.\n";
-                        fobj.save_cart();
+                        save_cart();
                         f = 1;
                         break;
                     }
@@ -607,7 +668,7 @@ public:
                             temp.p_time = ctime(&ti);
                             st.quantity -= c.second;
                             purchase_hstry.push_back(temp);
-                            fobj.save_purchase();
+                            save_purchase();
                             break;
                         }
                 }
@@ -616,7 +677,27 @@ public:
         cout << "\ntotal bill: " << cost << " taka." << endl
              << "thanks for purchasing.\n";
         cart_list.erase(t.user_name);
-        fobj.save_product(), fobj.save_cart();
+        save_product(), save_cart();
+    }
+    void save_product()
+    {
+        ofstream file("product.txt");
+        if (file.is_open())
+        {
+            for (auto &a : all_prod)
+                file << a.id << " " << a.price << " " << a.quantity << " " << a.name << ", " << a.owner_name << ",\n";
+        }
+        file.close();
+    }
+    void save_customer()
+    {
+        ofstream file("customer.txt");
+        if (file.is_open())
+        {
+            for (auto &a : customer_list)
+                file << a.user_name << ", " << a.age << " " << a.name << ", " << a.contact << ", " << a.address << "* " << a.pass << ",\n";
+        }
+        file.close();
     }
 };
 
@@ -665,7 +746,7 @@ public:
     }
     void admdashboard()
     {
-        cout << "\n             welcome to admin dashboard  \n\nplease choose any option given below: \n1.view sellers\n2.view customers\n3. ban someone\n4. view products\n5. view purchase history\n6.return\nchoose: ";
+        cout << "\n             welcome to admin dashboard  \n\nplease choose any option given below: \n1. view sellers\n2. view customers\n3. ban someone\n4. view products\n5. view purchase history\n6. return\nchoose: ";
         int choose;
         cin >> choose;
         while (choose != 6)
@@ -691,7 +772,7 @@ public:
                 cout << "\ninvalid input\n";
                 break;
             }
-            cout << "\n1.view sellers\n2.view customers\n3. ban someone\n4. view products\n5. view purchase history\n6.return\nchoose: ";
+            cout << "\n1. view sellers\n2. view customers\n3. ban someone\n4. view products\n5. view purchase history\n6. return\nchoose: ";
             cin >> choose;
         }
     }
@@ -707,7 +788,7 @@ public:
             {
                 seller_list.erase(seller_list.begin() + cnt);
                 cout << "\nseller banned sucessfully\n";
-                fobj.save_seller();
+                save_seller();
                 f = 1;
                 break;
             }
@@ -720,9 +801,30 @@ public:
             for (int i = 0; i < all_prod.size(); i++)
                 if (all_prod[i].owner_name == s)
                     all_prod.erase(all_prod.begin() + i), i--;
-            fobj.save_product();
+            save_product();
         }
     }
+    void save_seller()
+    {
+        ofstream file("seller.txt");
+        if (file.is_open())
+        {
+            for (auto &a : seller_list)
+                file << a.user_name << ", " << a.age << " " << a.name << ", " << a.contact << ", " << a.address << "* " << a.log_pass << ",\n";
+        }
+        file.close();
+    }
+    void save_product()
+    {
+        ofstream file("product.txt");
+        if (file.is_open())
+        {
+            for (auto &a : all_prod)
+                file << a.id << " " << a.price << " " << a.quantity << " " << a.name << ", " << a.owner_name << ",\n";
+        }
+        file.close();
+    }
+
     void ban_()
     {
         cout << "\n1.ban a seller\n2.ban a customer\n3.return\nchoose: ";
@@ -758,7 +860,7 @@ public:
             {
                 customer_list.erase(customer_list.begin() + cnt);
                 cout << "\ncustomer banned sucessfully\n";
-                fobj.save_customer();
+                save_customer();
                 f = 1;
                 break;
             }
@@ -767,6 +869,17 @@ public:
         if (!f)
             cout << "\ncustomer not found.\n";
     }
+    void save_customer()
+    {
+        ofstream file("customer.txt");
+        if (file.is_open())
+        {
+            for (auto &a : customer_list)
+                file << a.user_name << ", " << a.age << " " << a.name << ", " << a.contact << ", " << a.address << "* " << a.pass << ",\n";
+        }
+        file.close();
+    }
+
     void view_products()
     {
         cout << "\n1. all products\n2.single product\n3.seller specified products\n4.return\nchoose: ";
@@ -908,10 +1021,9 @@ public:
             cout << "\nno products found for the seller username.\n";
     }
 };
+
 class file_handle
 {
-    friend seller;
-
 public:
     void load_files()
     {
@@ -938,12 +1050,12 @@ public:
             }
         }
         file.close();
-        ifstream file("seller.txt");
-        if (file.is_open())
+        ifstream file2("seller.txt");
+        if (file2.is_open())
         {
             seller t;
             string s;
-            while (getline(file, s))
+            while (getline(file2, s))
             {
                 stringstream s1(s);
                 getline(s1, t.user_name, ',');
@@ -960,13 +1072,13 @@ public:
                 seller_list.push_back(t);
             }
         }
-        file.close();
-        ifstream file("purchase.txt");
-        if (file.is_open())
+        file2.close();
+        ifstream file3("purchase.txt");
+        if (file3.is_open())
         {
             purchase t;
             string s;
-            while (getline(file, s))
+            while (getline(file3, s))
             {
                 stringstream s1(s);
                 s1 >> t.id >> t.quantity >> t.cost;
@@ -978,13 +1090,13 @@ public:
                 purchase_hstry.push_back(t);
             }
         }
-        file.close();
-        ifstream file("product.txt");
-        if (file.is_open())
+        file3.close();
+        ifstream file4("product.txt");
+        if (file4.is_open())
         {
             products t;
             string s;
-            while (getline(file, s))
+            while (getline(file4, s))
             {
                 stringstream s1(s);
                 s1 >> t.id >> t.price >> t.quantity;
@@ -994,81 +1106,32 @@ public:
                 all_prod.push_back(t);
             }
         }
-        file.close();
-        ifstream file("cart.txt");
-        if (file.is_open())
+        file4.close();
+        ifstream file5("cart.txt");
+        if (file5.is_open())
         {
             int a, b;
             string n;
             string s;
-            while (getline(file, s))
+            while (getline(file5, s))
             {
                 stringstream s1(s);
                 s1 >> a >> b;
                 getline(s1, n, ',');
-                cart_list[n].push_back({a, b});
+                cart_list[{n}].push_back({a, b});
             }
         }
-        file.close();
-    }
-    void save_customer()
-    {
-        ofstream file("customer.txt");
-        if (file.is_open())
-        {
-            for (auto &a : customer_list)
-                file << a.user_name << ", " << a.age << " " << a.name << ", " << a.contact << ", " << a.address << "* " << a.pass << ",\n";
-        }
-        file.close();
-    }
-    void save_seller()
-    {
-        ofstream file("seller.txt");
-        if (file.is_open())
-        {
-            for (auto &a : seller_list)
-                file << a.user_name << ", " << a.age << " " << a.name << ", " << a.contact << ", " << a.address << "* " << a.log_pass << ",\n";
-        }
-        file.close();
-    }
-    void save_purchase()
-    {
-        ofstream file("purchase.txt");
-        if (file.is_open())
-        {
-            for (auto &a : purchase_hstry)
-                file << a.id << " " << a.quantity << " " << a.cost << " " << a.name << ", " << a.user_name << ", " << a.p_time << "*\n";
-        }
-        file.close();
-    }
-    void save_product()
-    {
-        ofstream file("product.txt");
-        if (file.is_open())
-        {
-            for (auto &a : all_prod)
-                file << a.id << " " << a.price << " " << a.quantity << " " << a.name << ", " << a.owner_name << ",\n";
-        }
-        file.close();
-    }
-    void save_cart()
-    {
-        ofstream file("cart.txt");
-        if (file.is_open())
-        {
-            for (auto &[a, b] : cart_list)
-                for (auto &[c, d] : b)
-                    file << c << " " << d << " " << a << ",\n";
-        }
-        file.close();
+        file5.close();
     }
 };
-file_handle fobj;
-Rshop obj;
-seller sobj;
-customer cobj;
+
 int main()
 {
+    Rshop obj;
+    seller sobj;
+    customer cobj;
+    file_handle fobj;
+
     fobj.load_files();
     cout << "           Welcome to my mini E-commerce site.\n\n1.enter as admin\n2.enter as a seller\n3.enter as customer\nchoose: ";
     int choose;
