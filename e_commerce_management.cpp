@@ -517,10 +517,12 @@ public:
                 for (auto &a : all_prod)
                 {
                     if (a.id == choose)
+                    {
                         if (quan > a.quantity)
                             while (quan > a.quantity)
                                 cout << "\nnot enough products available, please lower the quantity.\nenter quantity: ", cin >> quan;
-                    break;
+                        break;
+                    }
                 }
                 add_to_cart(choose, t, quan);
                 save_cart();
@@ -667,17 +669,22 @@ public:
                             temp.quantity = c.second;
                             temp.p_time = ctime(&ti);
                             st.quantity -= c.second;
-                            purchase_hstry.push_back(temp);
-                            save_purchase();
+                            if (cost)
+                                purchase_hstry.push_back(temp), save_purchase();
                             break;
                         }
                 }
                 break;
             }
-        cout << "\ntotal bill: " << cost << " taka." << endl
-             << "thanks for purchasing.\n";
-        cart_list.erase(t.user_name);
-        save_product(), save_cart();
+        if (cost)
+        {
+            cout << "\ntotal bill: " << cost << " taka." << endl
+                 << "thanks for purchasing.\n";
+            cart_list.erase(t.user_name);
+            save_product(), save_cart();
+        }
+        else
+            cout << "\nnothing to buy in your cart.\n";
     }
     void save_product()
     {
