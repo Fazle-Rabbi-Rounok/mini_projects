@@ -8,6 +8,14 @@ vector<class seller> seller_list;
 vector<pair<string, vector<pair<int, int>>>> cart_list;
 class purchase
 {
+    string user_name;
+    int id;
+    string name;
+    int quantity;
+    string p_time;
+    int cost;
+    friend customer;
+    friend Rshop;
 };
 class products
 {
@@ -295,8 +303,11 @@ public:
                 customer_dash(a);
                 break;
             }
-        cout << "username or password doesnt match, please try again\n";
-        customer_dashboard();
+            else
+            {
+                cout << "username or password doesnt match, please try again\n";
+                customer_dashboard();
+            }
     }
     void customer_dash(customer &tem)
     {
@@ -315,13 +326,13 @@ public:
                 cart(tem);
                 break;
             case 3:
-                // pur_histry(tem);
+                pur_hstry(tem);
                 break;
             default:
-                cout << "invalid input\n ";
+                cout << "invalid input.\n ";
                 break;
             }
-            cout << "1. view poducts\n2. add products\n3. remove products\n4.update stock\n5. update price\n6. exit\nchoose: ";
+            cout << "1. search poducts\n2. go to cart\n3. purchase history\n4. exit\nchoose: ";
             cin >> choose;
         }
     }
@@ -387,6 +398,14 @@ public:
                 int quan;
                 cout << "enter quantity: ";
                 cin >> quan;
+                for (auto &a : all_prod)
+                {
+                    if (a.id == choose)
+                        if (quan > a.quantity)
+                            while (quan > a.quantity)
+                                cout << "not enough products available, please lower the quantity.\nenter quantity: ", cin >> quan;
+                    break;
+                }
                 add_to_cart(choose, t, quan);
                 cout << "product added to your cart.\n";
             }
@@ -409,6 +428,16 @@ public:
     }
     void pur_hstry(customer &t)
     {
+        int f = 0;
+        cout << "your purchase history\n\n";
+        for (auto &a : purchase_hstry)
+        {
+            if (t.user_name == a.user_name)
+                cout << "name: " << a.name << "    id: " << a.id << "    quantity: " << a.quantity << "    cost: " << a.cost << "    time: " << a.p_time << endl;
+            f = 1;
+        }
+        if (!f)
+            cout << "no purchase history found.\n";
     }
     void cart(customer &t)
     {
@@ -496,14 +525,25 @@ public:
         for (auto &[a, b] : cart_list)
             if (a == t.user_name)
             {
+                purchase temp;
                 for (auto &c : b)
                 {
                     cost += c.second * c.first;
                     cout << c.second << " ";
-                    for (auto &q : all_prod)
-                        if (c.first == q.id)
+                    for (auto &st : all_prod)
+                        if (c.first == st.id)
                         {
-                            cout << q.name << endl;
+                            time_t ti;
+                            time(&ti);
+                            cout << st.name << endl;
+                            temp.user_name = t.user_name;
+                            temp.id = c.first;
+                            temp.cost = c.second * c.first;
+                            temp.name = st.name;
+                            temp.quantity = c.second;
+                            temp.p_time = ctime(&ti);
+                            st.quantity -= c.second;
+                            purchase_hstry.push_back(temp);
                             break;
                         }
                 }
@@ -526,7 +566,7 @@ public:
 class Rshop
 {
     string user_name = "admin";
-    string log_pass = "admin123";
+    string log_pass = "admin";
 
 public:
     void view_seller()
@@ -540,7 +580,7 @@ public:
     void view_customers()
     {
         for (auto &a : customer_list)
-            cout << "name: " << a.name << "\nid: " << a.age << "\n";
+            cout << "name: " << a.name << "\nage: " << a.age << "\ncontact info: " << a.contact << "\naddress: " << a.address << endl;
     }
     void admin_dashboard()
     {
@@ -620,7 +660,7 @@ public:
         cin >> choose;
         while (choose < 1 || choose > 3)
         {
-            cout << "invalid input\nchoose: ";
+            cout << "invalid input.\nchoose: ";
             cin >> choose;
         }
         if (choose == 1)
@@ -630,6 +670,23 @@ public:
     }
     void ban_customer()
     {
+        cout << "enter customer user name: ";
+        cin.ignore();
+        string s;
+        getline(cin, s);
+        int f = 0, cnt = 0;
+        for (auto &a : customer_list)
+            if (s == a.user_name)
+            {
+                customer_list.erase(customer_list.begin() + cnt);
+                cout << "customer banned sucessfully\n";
+                f = 1;
+                break;
+            }
+            else
+                cnt++;
+        if (!f)
+            cout << "customer not found.\n";
     }
     void view_products()
     {
@@ -645,7 +702,47 @@ public:
         else if (choose == 3)
             view_seller_prod();
     }
-    void view_history() {}
+    void view_history()
+    {
+        cout << "1.all history\n2. customer specified.\n3.exit\nchoose: ";
+        int choose;
+        cin >> choose;
+        while (choose < 1 || choose > 3)
+            cout << "invalid input, choose :", cin >> choose;
+        if (choose == 1)
+            show_all_history();
+        else if (choose == 2)
+            single_history();
+    }
+    void show_all_history()
+    {
+        int f = 0;
+        cout << "customer's purchase history\n\n";
+        for (auto &a : purchase_hstry)
+        {
+            cout << "name: " << a.name << "    id: " << a.id << "    quantity: " << a.quantity << "    cost: " << a.cost << "    time: " << a.p_time << endl;
+            f = 1;
+        }
+        if (!f)
+            cout << "no purchase history found.\n";
+    }
+    void single_history()
+    {
+        cout << "enter customer user name: ";
+        string s;
+        cin.ignore();
+        getline(cin, s);
+        int f = 0;
+        cout << "customer's purchase history\n\n";
+        for (auto &a : purchase_hstry)
+        {
+            if (s == a.user_name)
+                cout << "name: " << a.name << "    id: " << a.id << "    quantity: " << a.quantity << "    cost: " << a.cost << "    time: " << a.p_time << endl;
+            f = 1;
+        }
+        if (!f)
+            cout << "no purchase history found for the user name.\n";
+    }
     void view_all_prod()
     {
         int f = 0;
@@ -709,6 +806,7 @@ int main()
         switch (choose)
         {
         case 1:
+            cout << "username: admin, password: admin\n";
             obj.admin_dashboard();
             break;
         case 2:
