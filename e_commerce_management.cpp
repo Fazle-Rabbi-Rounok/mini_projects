@@ -6,6 +6,23 @@ vector<class customer> customer_list;
 vector<class products> all_prod;
 vector<class seller> seller_list;
 map<string, vector<pair<int, int>>> cart_list;
+long long validate()
+{
+    string s;
+here:
+{
+    getline(cin, s);
+    for (auto &a : s)
+        if (!isdigit(a))
+        {
+            cout << "invalid integer input. please input again: ";
+            goto here;
+        }
+    if (s.size() == 0)
+        goto here;
+    return stoll(s);
+}
+}
 void save_cart()
 {
     ofstream file6("cart.txt");
@@ -70,7 +87,7 @@ public:
     {
         int choose;
         cout << "\n1.log in\n2.sign up\n3.return\nchoose: ";
-        cin >> choose;
+        choose = validate();
         while (choose != 3)
         {
             switch (choose)
@@ -86,7 +103,7 @@ public:
                 break;
             }
             cout << "\n1.log in\n2.sign up\n3.return\nchoose: ";
-            cin >> choose;
+            choose= validate();
         }
     }
     void seller_reg()
@@ -96,7 +113,7 @@ public:
         cout << "\nenter your name: ";
         getline(cin, tem.name);
         cout << "enter your age: ";
-        cin >> tem.age;
+         tem.age= validate();
         cin.ignore();
         cout << "enter your contact number: ";
         getline(cin, tem.contact);
@@ -153,7 +170,7 @@ public:
         cout << "           welcome to your dashboard " << tem.name << " \n\n";
         cout << "1. view poducts\n2. add products\n3. remove products\n4. update stock\n5. update price\n6. return\nchoose: ";
         int choose;
-        cin >> choose;
+        choose = validate();
         while (choose != 6)
         {
             switch (choose)
@@ -178,7 +195,7 @@ public:
                 break;
             }
             cout << "\n1. view poducts\n2. add products\n3. remove products\n4. update stock\n5. update price\n6. return\nchoose: ";
-            cin >> choose;
+            choose = validate();
         }
     }
     void add_product(seller &t)
@@ -186,9 +203,9 @@ public:
         products tem;
         tem.owner_name = t.user_name;
         cout << "\nenter product id: ";
-        cin >> tem.id;
+         tem.id= validate();
         while (tem.id < 1)
-            cout << "\nid must be greater than 0.\nenter id again: ", cin >> tem.id;
+            cout << "\nid must be greater than 0.\nenter id again: ", tem.id= validate();
         int f;
         while (f)
         {
@@ -197,7 +214,7 @@ public:
                 if (a.id == tem.id)
                 {
                     cout << "\nproduct id already taken. Enter a new id: ";
-                    cin >> tem.id;
+                     tem.id= validate();
                     f = 1;
                     break;
                 }
@@ -206,9 +223,9 @@ public:
         cout << "enter product name: ";
         getline(cin, tem.name);
         cout << "enter product price: ";
-        cin >> tem.price;
+         tem.price= validate();
         cout << "enter product quantity: ";
-        cin >> tem.quantity;
+        tem.quantity= validate();
         all_prod.push_back(tem);
         cout << "\nproduct added successfully.\n";
         save_product();
@@ -217,12 +234,12 @@ public:
     {
         cout << "\nenter product id: ";
         int iid, f = 0;
-        cin >> iid;
+         iid= validate();
         for (auto &a : all_prod)
             if (a.id == iid && t.user_name == a.owner_name)
             {
                 cout << "enter re stock amount: ";
-                cin >> a.quantity;
+                 a.quantity= validate();
                 cout << "\nstock updated successfull.\n";
                 save_product();
                 f = 1;
@@ -235,12 +252,12 @@ public:
     {
         cout << "\nenter product id: ";
         int pric, f = 0;
-        cin >> pric;
+         pric= validate();
         for (auto &a : all_prod)
             if (a.id == pric && t.user_name == a.owner_name)
             {
                 cout << "enter new price: ";
-                cin >> a.price;
+             a.price= validate();
                 cout << "\nprice updated successfully.\n";
                 save_product();
                 f = 1;
@@ -253,7 +270,7 @@ public:
     {
         int choose;
         cout << "\n1. single product\n2. all products\n3.return\nchoose: ";
-        cin >> choose;
+        choose = validate();
         while (choose != 3)
         {
             switch (choose)
@@ -269,14 +286,14 @@ public:
                 break;
             }
             cout << "\n1. single product\n2. all products\n3.return\nchoose: ";
-            cin >> choose;
+            choose = validate();
         }
     }
     void view_single_prod(seller &t)
     {
         cout << "\nenter product id: ";
         int i, f = 0;
-        cin >> i;
+         i= validate();
         cout << "\n";
         for (auto &a : all_prod)
         {
@@ -306,7 +323,7 @@ public:
     {
         cout << "\nenter product id: ";
         int i, f = 0, cnt = 0;
-        cin >> i;
+        i= validate();
         for (auto &a : all_prod)
         {
             if (a.id == i && a.owner_name == t.user_name)
@@ -372,7 +389,7 @@ public:
     {
         int choose;
         cout << "\n1.log in\n2.sign up\n3.return\nchoose: ";
-        cin >> choose;
+        choose = validate();
         while (choose != 3)
         {
             switch (choose)
@@ -388,7 +405,7 @@ public:
                 break;
             }
             cout << "\n1.log in\n2.sign up\n3.return\nchoose: ";
-            cin >> choose;
+            choose = validate();
         }
     }
     void customer_log_in()
@@ -421,7 +438,7 @@ public:
         cout << "           welcome to your dashboard " << tem.name << " \n\n";
         cout << "1. search poducts\n2. go to cart\n3. purchase history\n4. return\nchoose: ";
         int choose;
-        cin >> choose;
+        choose = validate();
         while (choose != 4)
         {
             switch (choose)
@@ -440,7 +457,7 @@ public:
                 break;
             }
             cout << "\n1. search poducts\n2. go to cart\n3. purchase history\n4. return\nchoose: ";
-            cin >> choose;
+            choose = validate();
         }
     }
     void customer_reg()
@@ -450,7 +467,7 @@ public:
         cout << "\nenter your name: ";
         getline(cin, tem.name);
         cout << "enter your age: ";
-        cin >> tem.age;
+         tem.age= validate();
         cin.ignore();
         cout << "enter your contact number: ";
         getline(cin, tem.contact);
@@ -500,7 +517,7 @@ public:
     }
         cout << "\nenter 0 to search again\nenter -1 to return or\nenter product id to add to cart\nenter: ";
         int choose;
-        cin >> choose;
+        choose = validate();
         while (1)
         {
             switch (choose)
@@ -513,14 +530,14 @@ public:
             default:
                 int quan;
                 cout << "\nenter quantity: ";
-                cin >> quan;
+                quan = validate();
                 for (auto &a : all_prod)
                 {
                     if (a.id == choose)
                     {
                         if (quan > a.quantity)
                             while (quan > a.quantity)
-                                cout << "\nnot enough products available, please lower the quantity.\nenter quantity: ", cin >> quan;
+                                cout << "\nnot enough products available, please lower the quantity.\nenter quantity: ", quan = validate();
                         break;
                     }
                 }
@@ -532,7 +549,7 @@ public:
             if (choose == -1)
                 break;
             cout << "\nenter 0 to search again\nenter -1 to return or\nenter product id to add to cart\nenter: ";
-            cin >> choose;
+            choose = validate();
         }
     }
     void add_to_cart(int ch, customer &t, int q)
@@ -566,7 +583,7 @@ public:
         show_cart(t);
         cout << "\n1.remove from cart\n2.add more product\n3. confirm buy\n4.return\nchoose: ";
         int chose;
-        cin >> chose;
+         chose= validate();
         while (chose != 4)
         {
             switch (chose)
@@ -587,7 +604,7 @@ public:
                 break;
             }
             cout << "\n1.remove from cart\n2.add more product\n3. confirm buy\n4.return\nchoose: ";
-            cin >> chose;
+            chose= validate();
         }
     }
     void show_cart(customer &t)
@@ -616,7 +633,7 @@ public:
     {
         int iid;
         cout << "\nenter product id from your cart: ";
-        cin >> iid;
+         iid= validate();
         int f = 0;
         for (auto &[a, b] : cart_list)
             if (t.user_name == a)
@@ -755,7 +772,7 @@ public:
     {
         cout << "\n             welcome to admin dashboard  \n\nplease choose any option given below: \n1. view sellers\n2. view customers\n3. ban someone\n4. view products\n5. view purchase history\n6. return\nchoose: ";
         int choose;
-        cin >> choose;
+        choose = validate();
         while (choose != 6)
         {
             switch (choose)
@@ -780,7 +797,7 @@ public:
                 break;
             }
             cout << "\n1. view sellers\n2. view customers\n3. ban someone\n4. view products\n5. view purchase history\n6. return\nchoose: ";
-            cin >> choose;
+            choose = validate();
         }
     }
     void ban_seller()
@@ -836,7 +853,7 @@ public:
     {
         cout << "\n1.ban a seller\n2.ban a customer\n3.return\nchoose: ";
         int choose;
-        cin >> choose;
+        choose = validate();
         while (choose != 3)
         {
             switch (choose)
@@ -852,7 +869,7 @@ public:
                 break;
             }
             cout << "\n1.ban a seller\n2.ban a customer\n3.return\nchoose: ";
-            cin >> choose;
+            choose = validate();
         }
     }
     void ban_customer()
@@ -891,7 +908,7 @@ public:
     {
         cout << "\n1. all products\n2.single product\n3.seller specified products\n4.return\nchoose: ";
         int choose;
-        cin >> choose;
+        choose = validate();
         while (choose != 4)
         {
             switch (choose)
@@ -910,14 +927,14 @@ public:
                 break;
             }
             cout << "\n1. all products\n2.single product\n3.seller specified products\n4.return\nchoose: ";
-            cin >> choose;
+            choose = validate();
         }
     }
     void view_history()
     {
         cout << "\n1.all history\n2. customer specified.\n3.return\nchoose: ";
         int choose;
-        cin >> choose;
+        choose = validate();
         while (choose != 3)
         {
             switch (choose)
@@ -933,7 +950,7 @@ public:
                 break;
             }
             cout << "\n1.all history\n2. customer specified.\n3.return\nchoose: ";
-            cin >> choose;
+            choose = validate();
         }
     }
     void show_all_history()
@@ -993,7 +1010,7 @@ public:
         }
         cout << "\nenter product id: ";
         int i, f = 0;
-        cin >> i;
+         i= validate();
         cout << "\n";
         for (auto &a : all_prod)
         {
@@ -1142,7 +1159,7 @@ int main()
     fobj.load_files();
     cout << "           Welcome to my mini E-commerce site.\n\n1.enter as admin\n2.enter as a seller\n3.enter as customer\nchoose: ";
     int choose;
-    cin >> choose;
+    choose = validate();
     while (choose != 4)
     {
         switch (choose)
@@ -1161,6 +1178,6 @@ int main()
             break;
         }
         cout << "\n1.enter as admin\n2.enter as a seller\n3.enter as customer\n4. return\nchoose: ";
-        cin >> choose;
+        choose = validate();
     }
 }
