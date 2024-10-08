@@ -12,8 +12,13 @@ long long validate()
 here:
 {
     getline(cin, s);
-    for (auto &a : s)
-        if (!isdigit(a))
+    if (s.size() == 1 && s[0] == '-')
+    {
+        cout << "invalid integer input. please input again: ";
+        goto here;
+    }
+    for (int i = 1; i < s.size(); i++)
+        if (!isdigit(s[i]))
         {
             cout << "invalid integer input. please input again: ";
             goto here;
@@ -86,7 +91,7 @@ public:
     void seller_dashboard()
     {
         int choose;
-        cout << "\n1.log in\n2.sign up\n3.return\nchoose: ";
+        cout << "\n         seller dashboard\n1.log in\n2.sign up\n3.return\nchoose: ";
         choose = validate();
         while (choose != 3)
         {
@@ -102,7 +107,7 @@ public:
                 cout << "\ninvalid input.\n";
                 break;
             }
-            cout << "\n1.log in\n2.sign up\n3.return\nchoose: ";
+            cout << "\n         seller dashboard\n1.log in\n2.sign up\n3.return\nchoose: ";
             choose = validate();
         }
     }
@@ -118,7 +123,7 @@ public:
             cout << "age must be in the range 1-150, please input again: ", tem.age = validate();
         }
         cout << "enter your contact number: ";
-        getline(cin, tem.contact);
+        tem.contact = to_string(validate());
         cout << "enter your address: ";
         getline(cin, tem.address);
         cout << "enter your username: ";
@@ -410,7 +415,7 @@ public:
     void customer_dashboard()
     {
         int choose;
-        cout << "\n1.log in\n2.sign up\n3.return\nchoose: ";
+        cout << "\n         customer dashboard\n1.log in\n2.sign up\n3.return\nchoose: ";
         choose = validate();
         while (choose != 3)
         {
@@ -426,7 +431,7 @@ public:
                 cout << "\ninvalid input.\n";
                 break;
             }
-            cout << "\n1.log in\n2.sign up\n3.return\nchoose: ";
+            cout << "\n         customer dashboard\n1.log in\n2.sign up\n3.return\nchoose: ";
             choose = validate();
         }
     }
@@ -491,7 +496,7 @@ public:
         while (tem.age < 1 || tem.age > 150)
             cout << "\nage must be in the range 1-150.\nenter age again: ", tem.age = validate();
         cout << "enter your contact number: ";
-        getline(cin, tem.contact);
+        tem.contact = to_string(validate());
         cout << "enter your address: ";
         getline(cin, tem.address);
         cout << "enter your username: ";
@@ -521,7 +526,7 @@ public:
     {
         string tem;
         int f = 0;
-        cout << "\nsearch for your desired product by their name or by some part of their name: ";
+        cout << "\nsearch by name or part of a name: ";
         getline(cin, tem);
         cout << "\n";
         for (auto &a : all_prod)
@@ -538,6 +543,9 @@ public:
         cout << "\nenter 0 to search again\nenter -1 to return or\nenter product id to add to cart\nenter: ";
         int choose;
         choose = validate();
+    th:
+    {
+    }
         while (1)
         {
             switch (choose)
@@ -548,6 +556,10 @@ public:
             case -1:
                 break;
             default:
+            h:
+            {
+                if (choose == 0)
+                    goto th;
                 int fl = 0;
                 for (auto &a : all_prod)
                     if (a.id == choose)
@@ -557,9 +569,11 @@ public:
                     }
                 if (!fl)
                 {
-                    cout << "\nproduct id invalid. enter id again: ";
+                    cout << "\nproduct id invalid.\nenter 0 to return or enter id again: ";
                     choose = validate();
+                    goto h;
                 }
+            }
                 int quan;
                 cout << "\nenter quantity: ";
                 quan = validate();
@@ -590,9 +604,11 @@ public:
         for (auto &[a, b] : cart_list)
         {
             if (a == t.user_name)
+            {
                 b.push_back({ch, q});
-            f = 1;
-            break;
+                f = 1;
+                break;
+            }
         }
         if (!f)
             cart_list.insert({t.user_name, {{ch, q}}});
@@ -644,6 +660,7 @@ public:
         int f = 0;
         cout << "\nyour cart list\n\n";
         for (auto &[a, b] : cart_list)
+        {
             if (a == t.user_name)
             {
                 for (auto &c : b)
@@ -657,7 +674,9 @@ public:
                         }
                     }
                 }
+                break;
             }
+        }
         if (!f)
             cout << "no products were found in your cart.\n";
     }
@@ -963,7 +982,7 @@ public:
     }
     void view_history()
     {
-        cout << "\n1.all history\n2. customer specified.\n3.return\nchoose: ";
+        cout << "\n1. all history\n2. customer specified.\n3. return\nchoose: ";
         int choose;
         choose = validate();
         while (choose != 3)
@@ -980,7 +999,7 @@ public:
                 cout << "\ninvalid input.\n";
                 break;
             }
-            cout << "\n1.all history\n2. customer specified.\n3.return\nchoose: ";
+            cout << "\n1. all history\n2. customer specified.\n3. return\nchoose: ";
             choose = validate();
         }
     }
@@ -1099,6 +1118,7 @@ public:
                 getline(s1, t.user_name, ',');
                 s1.ignore();
                 s1 >> t.age;
+                s1.ignore();
                 getline(s1, t.name, ',');
                 s1.ignore();
                 getline(s1, t.contact, ',');
@@ -1106,7 +1126,6 @@ public:
                 getline(s1, t.address, '*');
                 s1.ignore();
                 getline(s1, t.pass, ',');
-                s1.ignore();
                 customer_list.push_back(t);
             }
         }
@@ -1122,6 +1141,7 @@ public:
                 getline(s1, t.user_name, ',');
                 s1.ignore();
                 s1 >> t.age;
+                s1.ignore();
                 getline(s1, t.name, ',');
                 s1.ignore();
                 getline(s1, t.contact, ',');
@@ -1129,7 +1149,6 @@ public:
                 getline(s1, t.address, '*');
                 s1.ignore();
                 getline(s1, t.log_pass, ',');
-                s1.ignore();
                 seller_list.push_back(t);
             }
         }
@@ -1143,6 +1162,7 @@ public:
             {
                 stringstream s1(s);
                 s1 >> t.id >> t.quantity >> t.cost;
+                s1.ignore();
                 getline(s1, t.name, ',');
                 s1.ignore();
                 getline(s1, t.user_name, ',');
@@ -1161,6 +1181,7 @@ public:
             {
                 stringstream s1(s);
                 s1 >> t.id >> t.price >> t.quantity;
+                s1.ignore();
                 getline(s1, t.name, ',');
                 s1.ignore();
                 getline(s1, t.owner_name, ',');
@@ -1178,8 +1199,20 @@ public:
             {
                 stringstream s1(s);
                 s1 >> a >> b;
+                s1.ignore();
                 getline(s1, n, ',');
-                cart_list[{n}].push_back({a, b});
+                int f = 0;
+                for (auto &[p, q] : cart_list)
+                {
+                    if (p == n)
+                    {
+                        q.push_back({a, b});
+                        f = 1;
+                        break;
+                    }
+                }
+                if (!f)
+                    cart_list.insert({n, {{a, b}}});
             }
         }
         file5.close();
