@@ -109,7 +109,6 @@ public:
     void seller_reg()
     {
         seller tem;
-        cin.ignore();
         cout << "\nenter your name: ";
         getline(cin, tem.name);
         cout << "enter your age: ";
@@ -118,7 +117,6 @@ public:
         {
             cout << "age must be in the range 1-150, please input again: ", tem.age = validate();
         }
-        cin.ignore();
         cout << "enter your contact number: ";
         getline(cin, tem.contact);
         cout << "enter your address: ";
@@ -147,7 +145,6 @@ public:
     void seller_log_in()
     {
         int f = 0;
-        cin.ignore();
         if (!seller_list.size())
         {
             cout << "\nno seller registered. Please sign up\n";
@@ -225,7 +222,6 @@ public:
                     break;
                 }
         }
-        cin.ignore();
         cout << "enter product name: ";
         getline(cin, tem.name);
         cout << "enter product price: ";
@@ -318,9 +314,11 @@ public:
         for (auto &a : all_prod)
         {
             if (a.id == i && a.owner_name == t.user_name)
+            {
                 cout << "name: " << a.name << "\nid: " << a.id << "\nprice: " << a.price << "\nstock available: " << a.quantity << "\n";
-            f = 1;
-            break;
+                f = 1;
+                break;
+            }
         }
         if (!f)
             cout << "product not found.\n";
@@ -332,9 +330,11 @@ public:
         for (auto &a : all_prod)
         {
             if (a.owner_name == t.user_name)
+            {
                 cout << "name: " << a.name << "\nid: " << a.id << "\nprice: " << a.price << "\nstock available: " << a.quantity << "\n"
                      << "- - -\n";
-            f = 1;
+                f = 1;
+            }
         }
         if (!f)
             cout << "no products were found\n";
@@ -434,7 +434,6 @@ public:
     {
         int f = 0;
         customer tem;
-        cin.ignore();
         if (!customer_list.size())
         {
             cout << "\nno customer found. Please sign up.\n";
@@ -485,14 +484,12 @@ public:
     void customer_reg()
     {
         customer tem;
-        cin.ignore();
         cout << "\nenter your name: ";
         getline(cin, tem.name);
         cout << "enter your age: ";
         tem.age = validate();
         while (tem.age < 1 || tem.age > 150)
             cout << "\nage must be in the range 1-150.\nenter age again: ", tem.age = validate();
-        cin.ignore();
         cout << "enter your contact number: ";
         getline(cin, tem.contact);
         cout << "enter your address: ";
@@ -525,7 +522,6 @@ public:
         string tem;
         int f = 0;
         cout << "\nsearch for your desired product by their name or by some part of their name: ";
-        cin.ignore();
         getline(cin, tem);
         cout << "\n";
         for (auto &a : all_prod)
@@ -796,7 +792,6 @@ public:
     void admin_dashboard()
     {
         string user, logpass;
-        cin.ignore();
         cout << "\nplease log in:  (admin,admin)\nenter username: ";
         getline(cin, user);
         cout << "enter password: ";
@@ -841,7 +836,6 @@ public:
     void ban_seller()
     {
         cout << "\nenter seller username: ";
-        cin.ignore();
         string s;
         getline(cin, s);
         int f = 0, cnt = 0;
@@ -913,7 +907,6 @@ public:
     void ban_customer()
     {
         cout << "\nenter customer username: ";
-        cin.ignore();
         string s;
         getline(cin, s);
         int f = 0, cnt = 0;
@@ -1013,15 +1006,16 @@ public:
         }
         cout << "\nenter customer username: ";
         string s;
-        cin.ignore();
         getline(cin, s);
         int f = 0;
         cout << "\ncustomer's purchase history\n\n";
         for (auto &a : purchase_hstry)
         {
             if (s == a.user_name)
+            {
                 cout << "name: " << a.name << "    id: " << a.id << "    quantity: " << a.quantity << "    cost: " << a.cost << "    time: " << a.p_time << endl;
-            f = 1;
+                f = 1;
+            }
         }
         if (!f)
             cout << "\nno purchase history found for the username.\n";
@@ -1055,9 +1049,11 @@ public:
         for (auto &a : all_prod)
         {
             if (a.id == i)
+            {
                 cout << "owner: " << a.owner_name << "\nname: " << a.name << "\nid: " << a.id << "\nprice: " << a.price << "\nstock available: " << a.quantity << "\n";
-            f = 1;
-            break;
+                f = 1;
+                break;
+            }
         }
         if (!f)
             cout << "\nproduct not found.\n";
@@ -1072,14 +1068,15 @@ public:
         cout << "\nenter seller username: ";
         int f = 0;
         string tem;
-        cin.ignore();
         getline(cin, tem);
         cout << "\n";
         for (auto &a : all_prod)
         {
             if (a.owner_name == tem)
+            {
                 cout << "name: " << a.name << "\nid: " << a.id << "\nprice: " << a.price << "\nstock available: " << a.quantity << "\n";
-            f = 1;
+                f = 1;
+            }
         }
         if (!f)
             cout << "\nno products found for the seller username.\n";
