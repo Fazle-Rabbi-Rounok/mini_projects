@@ -103,7 +103,7 @@ public:
                 break;
             }
             cout << "\n1.log in\n2.sign up\n3.return\nchoose: ";
-            choose= validate();
+            choose = validate();
         }
     }
     void seller_reg()
@@ -113,7 +113,11 @@ public:
         cout << "\nenter your name: ";
         getline(cin, tem.name);
         cout << "enter your age: ";
-         tem.age= validate();
+        tem.age = validate();
+        while (tem.age < 1 || tem.age > 150)
+        {
+            cout << "age must be in the range 1-150, please input again: ", tem.age = validate();
+        }
         cin.ignore();
         cout << "enter your contact number: ";
         getline(cin, tem.contact);
@@ -203,9 +207,9 @@ public:
         products tem;
         tem.owner_name = t.user_name;
         cout << "\nenter product id: ";
-         tem.id= validate();
+        tem.id = validate();
         while (tem.id < 1)
-            cout << "\nid must be greater than 0.\nenter id again: ", tem.id= validate();
+            cout << "\nid must be greater than 0.\nenter id again: ", tem.id = validate();
         int f;
         while (f)
         {
@@ -214,7 +218,9 @@ public:
                 if (a.id == tem.id)
                 {
                     cout << "\nproduct id already taken. Enter a new id: ";
-                     tem.id= validate();
+                    tem.id = validate();
+                    while (tem.id < 1)
+                        cout << "\nid must be greater than 0.\nenter id again: ", tem.id = validate();
                     f = 1;
                     break;
                 }
@@ -223,9 +229,13 @@ public:
         cout << "enter product name: ";
         getline(cin, tem.name);
         cout << "enter product price: ";
-         tem.price= validate();
+        tem.price = validate();
+        while (tem.price < 1)
+            cout << "\nprice must be greater than 0.\nenter price again: ", tem.price = validate();
         cout << "enter product quantity: ";
-        tem.quantity= validate();
+        tem.quantity = validate();
+        while (tem.quantity < 1)
+            cout << "\nquantity must be greater than 0.\nenter quantity again: ", tem.quantity = validate();
         all_prod.push_back(tem);
         cout << "\nproduct added successfully.\n";
         save_product();
@@ -234,12 +244,16 @@ public:
     {
         cout << "\nenter product id: ";
         int iid, f = 0;
-         iid= validate();
+        iid = validate();
+        while (iid < 1)
+            cout << "\nid must be greater than 0.\nenter id again: ", iid = validate();
         for (auto &a : all_prod)
             if (a.id == iid && t.user_name == a.owner_name)
             {
                 cout << "enter re stock amount: ";
-                 a.quantity= validate();
+                a.quantity = validate();
+                while (a.quantity < 1)
+                    cout << "\nquantity must be greater than 0.\nenter quantity again: ", a.quantity = validate();
                 cout << "\nstock updated successfull.\n";
                 save_product();
                 f = 1;
@@ -252,12 +266,16 @@ public:
     {
         cout << "\nenter product id: ";
         int pric, f = 0;
-         pric= validate();
+        pric = validate();
+        while (pric < 1)
+            cout << "\nid must be greater than 0.\nenter id again: ", pric = validate();
         for (auto &a : all_prod)
             if (a.id == pric && t.user_name == a.owner_name)
             {
                 cout << "enter new price: ";
-             a.price= validate();
+                a.price = validate();
+                while (a.price < 1)
+                    cout << "\nprice must be greater than 0.\nenter price again: ", a.price = validate();
                 cout << "\nprice updated successfully.\n";
                 save_product();
                 f = 1;
@@ -293,7 +311,9 @@ public:
     {
         cout << "\nenter product id: ";
         int i, f = 0;
-         i= validate();
+        i = validate();
+        while (i < 1)
+            cout << "\nid must be greater than 0.\nenter id again: ", i = validate();
         cout << "\n";
         for (auto &a : all_prod)
         {
@@ -323,7 +343,9 @@ public:
     {
         cout << "\nenter product id: ";
         int i, f = 0, cnt = 0;
-        i= validate();
+        i = validate();
+        while (i < 1)
+            cout << "\nid must be greater than 0.\nenter id again: ", i = validate();
         for (auto &a : all_prod)
         {
             if (a.id == i && a.owner_name == t.user_name)
@@ -467,7 +489,9 @@ public:
         cout << "\nenter your name: ";
         getline(cin, tem.name);
         cout << "enter your age: ";
-         tem.age= validate();
+        tem.age = validate();
+        while (tem.age < 1 || tem.age > 150)
+            cout << "\nage must be in the range 1-150.\nenter age again: ", tem.age = validate();
         cin.ignore();
         cout << "enter your contact number: ";
         getline(cin, tem.contact);
@@ -528,6 +552,18 @@ public:
             case -1:
                 break;
             default:
+                int fl = 0;
+                for (auto &a : all_prod)
+                    if (a.id == choose)
+                    {
+                        fl = 1;
+                        break;
+                    }
+                if (!fl)
+                {
+                    cout << "\nproduct id invalid. enter id again: ";
+                    choose = validate();
+                }
                 int quan;
                 cout << "\nenter quantity: ";
                 quan = validate();
@@ -583,7 +619,7 @@ public:
         show_cart(t);
         cout << "\n1.remove from cart\n2.add more product\n3. confirm buy\n4.return\nchoose: ";
         int chose;
-         chose= validate();
+        chose = validate();
         while (chose != 4)
         {
             switch (chose)
@@ -604,7 +640,7 @@ public:
                 break;
             }
             cout << "\n1.remove from cart\n2.add more product\n3. confirm buy\n4.return\nchoose: ";
-            chose= validate();
+            chose = validate();
         }
     }
     void show_cart(customer &t)
@@ -633,7 +669,9 @@ public:
     {
         int iid;
         cout << "\nenter product id from your cart: ";
-         iid= validate();
+        iid = validate();
+        while (iid < 1)
+            cout << "\nid must be greater than 0.\nenter id again: ", iid = validate();
         int f = 0;
         for (auto &[a, b] : cart_list)
             if (t.user_name == a)
@@ -1010,7 +1048,9 @@ public:
         }
         cout << "\nenter product id: ";
         int i, f = 0;
-         i= validate();
+        i = validate();
+        while (i < 1)
+            cout << "\nid must be greater than 0.\nenter id again: ", i = validate();
         cout << "\n";
         for (auto &a : all_prod)
         {
