@@ -723,17 +723,18 @@ public:
                 purchase temp;
                 for (auto &c : b)
                 {
-                    cost += c.second * c.first;
+                   
                     cout << c.second << " ";
                     for (auto &st : all_prod)
                         if (c.first == st.id)
                         {
                             time_t ti;
                             time(&ti);
-                            cout << st.name << ": " << c.first * c.second << " taka" << endl;
+                            cout << st.name << ": " << st.price * c.second << " taka" << endl;
                             temp.user_name = t.user_name;
                             temp.id = c.first;
-                            temp.cost = c.second * c.first;
+                            temp.cost = st.price * c.second;
+                             cost += st.price * c.second;
                             temp.name = st.name;
                             temp.quantity = c.second;
                             temp.p_time = ctime(&ti);
