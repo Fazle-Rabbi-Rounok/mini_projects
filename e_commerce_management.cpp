@@ -12,7 +12,7 @@ long long validate()
 here:
 {
     getline(cin, s);
-    if (s.size() == 1 && s[0] == '-')
+    if (s.size() == 1 && !isdigit(s[0]))
     {
         cout << "invalid integer input. please input again: ";
         goto here;
@@ -35,7 +35,7 @@ void save_cart()
     {
         for (auto &[a, b] : cart_list)
             for (auto &[c, d] : b)
-                file6 << c << " " << d << " " << a << ",\n";
+                file6 << c << " " << d << " " << a << "\n";
     }
     file6.close();
 }
@@ -373,7 +373,7 @@ public:
         if (file.is_open())
         {
             for (auto &a : seller_list)
-                file << a.user_name << ", " << a.age << " " << a.name << ", " << a.contact << ", " << a.address << "* " << a.log_pass << ",\n";
+                file << a.user_name << ", " << a.age << " " << a.name << ", " << a.contact << ", " << a.address << "* " << a.log_pass << "\n";
         }
         file.close();
     }
@@ -383,7 +383,7 @@ public:
         if (file.is_open())
         {
             for (auto &a : all_prod)
-                file << a.id << " " << a.price << " " << a.quantity << " " << a.name << ", " << a.owner_name << ",\n";
+                file << a.id << " " << a.price << " " << a.quantity << " " << a.name << ", " << a.owner_name << "\n";
         }
         file.close();
     }
@@ -407,15 +407,14 @@ public:
         if (file.is_open())
         {
             for (auto &a : purchase_hstry)
-                file << a.id << " " << a.quantity << " " << a.cost << " " << a.name << ", " << a.user_name << ", " << a.p_time << "*\n";
+                file << a.id << " " << a.quantity << " " << a.cost << " " << a.name << ", " << a.user_name << ", " << a.p_time ;
         }
         file.close();
     }
-
     void customer_dashboard()
     {
         int choose;
-        cout << "\n         customer dashboard\n1.log in\n2.sign up\n3.return\nchoose: ";
+        cout << "\n         customer dashboard\n1. log in\n2. sign up\n3. return\nchoose: ";
         choose = validate();
         while (choose != 3)
         {
@@ -431,7 +430,7 @@ public:
                 cout << "\ninvalid input.\n";
                 break;
             }
-            cout << "\n         customer dashboard\n1.log in\n2.sign up\n3.return\nchoose: ";
+            cout << "\n         customer dashboard\n1. log in\n2. sign up\n3. return\nchoose: ";
             choose = validate();
         }
     }
@@ -629,7 +628,7 @@ public:
     void cart(customer &t)
     {
         show_cart(t);
-        cout << "\n1.remove from cart\n2.add more product\n3. confirm buy\n4.return\nchoose: ";
+        cout << "\n1. remove from cart\n2. add more product\n3. confirm buy\n4. return\nchoose: ";
         int chose;
         chose = validate();
         while (chose != 4)
@@ -651,7 +650,7 @@ public:
                 cout << "\ninvalid input.\n";
                 break;
             }
-            cout << "\n1.remove from cart\n2.add more product\n3. confirm buy\n4.return\nchoose: ";
+            cout << "\n1. remove from cart\n2. add more product\n3. confirm buy\n4.return\nchoose: ";
             chose = validate();
         }
     }
@@ -669,7 +668,7 @@ public:
                     {
                         if (d.id == c.first)
                         {
-                            cout << "id: " << d.id << "    name: " << d.name << "    price: " << d.price << "    quantity: " << c.second << endl;
+                            cout << "name: " << d.name << "    id: " << d.id << "    price: " << d.price << "    quantity: " << c.second << endl;
                             f = 1;
                         }
                     }
@@ -731,7 +730,7 @@ public:
                         {
                             time_t ti;
                             time(&ti);
-                            cout << st.name << endl;
+                            cout << st.name << ": " << c.first * c.second << " taka" << endl;
                             temp.user_name = t.user_name;
                             temp.id = c.first;
                             temp.cost = c.second * c.first;
@@ -762,7 +761,7 @@ public:
         if (file.is_open())
         {
             for (auto &a : all_prod)
-                file << a.id << " " << a.price << " " << a.quantity << " " << a.name << ", " << a.owner_name << ",\n";
+                file << a.id << " " << a.price << " " << a.quantity << " " << a.name << ", " << a.owner_name << "\n";
         }
         file.close();
     }
@@ -772,7 +771,7 @@ public:
         if (file.is_open())
         {
             for (auto &a : customer_list)
-                file << a.user_name << ", " << a.age << " " << a.name << ", " << a.contact << ", " << a.address << "* " << a.pass << ",\n";
+                file << a.user_name << ", " << a.age << " " << a.name << ", " << a.contact << ", " << a.address << "* " << a.pass << "\n";
         }
         file.close();
     }
@@ -794,7 +793,7 @@ public:
         cout << "\n";
         for (auto &a : seller_list)
         {
-            cout << "name: " << a.name << "\nage: " << a.age << "\ncontact number: " << a.contact << "\naddress: " << a.address << endl;
+            cout << "name: " << a.name << "\nage: " << a.age << "\ncontact number: 0" << a.contact << "\naddress: " << a.address << endl<<"- - -\n";
         }
     }
     void view_customers()
@@ -806,7 +805,7 @@ public:
         }
         cout << "\n";
         for (auto &a : customer_list)
-            cout << "name: " << a.name << "\nage: " << a.age << "\ncontact info: " << a.contact << "\naddress: " << a.address << endl;
+            cout << "name: " << a.name << "\nage: " << a.age << "\ncontact number: 0" << a.contact << "\naddress: " << a.address << endl<<"- - -\n";
     }
     void admin_dashboard()
     {
@@ -885,7 +884,7 @@ public:
         if (file.is_open())
         {
             for (auto &a : seller_list)
-                file << a.user_name << ", " << a.age << " " << a.name << ", " << a.contact << ", " << a.address << "* " << a.log_pass << ",\n";
+                file << a.user_name << ", " << a.age << " " << a.name << ", " << a.contact << ", " << a.address << "* " << a.log_pass << "\n";
         }
         file.close();
     }
@@ -895,7 +894,7 @@ public:
         if (file.is_open())
         {
             for (auto &a : all_prod)
-                file << a.id << " " << a.price << " " << a.quantity << " " << a.name << ", " << a.owner_name << ",\n";
+                file << a.id << " " << a.price << " " << a.quantity << " " << a.name << ", " << a.owner_name << "\n";
         }
         file.close();
     }
@@ -949,7 +948,7 @@ public:
         if (file.is_open())
         {
             for (auto &a : customer_list)
-                file << a.user_name << ", " << a.age << " " << a.name << ", " << a.contact << ", " << a.address << "* " << a.pass << ",\n";
+                file << a.user_name << ", " << a.age << " " << a.name << ", " << a.contact << ", " << a.address << "* " << a.pass << "\n";
         }
         file.close();
     }
@@ -1013,7 +1012,7 @@ public:
         cout << "\npurchase history\n\n";
         for (auto &a : purchase_hstry)
         {
-            cout << "name: " << a.name << "    id: " << a.id << "    quantity: " << a.quantity << "    cost: " << a.cost << "    time: " << a.p_time << endl;
+            cout << "name: " << a.name << "    id: " << a.id << "    quantity: " << a.quantity << "    cost: " << a.cost << "    time: " << a.p_time<<endl;
         }
     }
     void single_history()
@@ -1049,7 +1048,7 @@ public:
         cout << "\n";
         for (auto &a : all_prod)
         {
-            cout << "owner: " << a.owner_name << "\nname: " << a.name << "\nid: " << a.id << "\nprice: " << a.price << "\nstock available: " << a.quantity << "\n";
+            cout << "owner: " << a.owner_name << "\nname: " << a.name << "\nid: " << a.id << "\nprice: " << a.price << "\nstock available: " << a.quantity << "\n- - -\n";
         }
     }
     void view_single_prod()
@@ -1093,7 +1092,7 @@ public:
         {
             if (a.owner_name == tem)
             {
-                cout << "name: " << a.name << "\nid: " << a.id << "\nprice: " << a.price << "\nstock available: " << a.quantity << "\n";
+                cout << "name: " << a.name << "\nid: " << a.id << "\nprice: " << a.price << "\nstock available: " << a.quantity << "\n- - -\n";
                 f = 1;
             }
         }
@@ -1125,7 +1124,8 @@ public:
                 s1.ignore();
                 getline(s1, t.address, '*');
                 s1.ignore();
-                getline(s1, t.pass, ',');
+                getline(s1, t.pass);
+                s1.ignore();
                 customer_list.push_back(t);
             }
         }
@@ -1148,7 +1148,8 @@ public:
                 s1.ignore();
                 getline(s1, t.address, '*');
                 s1.ignore();
-                getline(s1, t.log_pass, ',');
+                getline(s1, t.log_pass);
+                s1.ignore();
                 seller_list.push_back(t);
             }
         }
@@ -1167,7 +1168,8 @@ public:
                 s1.ignore();
                 getline(s1, t.user_name, ',');
                 s1.ignore();
-                getline(s1, t.p_time, '*');
+                getline(s1, t.p_time);
+                s1.ignore();
                 purchase_hstry.push_back(t);
             }
         }
@@ -1184,7 +1186,8 @@ public:
                 s1.ignore();
                 getline(s1, t.name, ',');
                 s1.ignore();
-                getline(s1, t.owner_name, ',');
+                getline(s1, t.owner_name);
+                s1.ignore();
                 all_prod.push_back(t);
             }
         }
@@ -1200,7 +1203,8 @@ public:
                 stringstream s1(s);
                 s1 >> a >> b;
                 s1.ignore();
-                getline(s1, n, ',');
+                getline(s1, n);
+                s1.ignore();
                 int f = 0;
                 for (auto &[p, q] : cart_list)
                 {
@@ -1227,7 +1231,7 @@ int main()
     file_handle fobj;
 
     fobj.load_files();
-    cout << "           Welcome to my mini E-commerce site.\n\n1.enter as admin\n2.enter as a seller\n3.enter as customer\nchoose: ";
+    cout << "           Welcome to my mini E-commerce site.\n\n1. enter as admin\n2. enter as a seller\n3. enter as customer\n4. exit\nchoose: ";
     int choose;
     choose = validate();
     while (choose != 4)
@@ -1247,7 +1251,8 @@ int main()
             cout << "\ninvalid input\n ";
             break;
         }
-        cout << "\n1.enter as admin\n2.enter as a seller\n3.enter as customer\n4. return\nchoose: ";
+        cout << "\n1. enter as admin\n2. enter as a seller\n3. enter as customer\n4. exit\nchoose: ";
         choose = validate();
     }
+    cout << "\nthanks for trying out my e shop.\n\n";
 }
