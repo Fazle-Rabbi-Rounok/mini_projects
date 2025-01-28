@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="cs.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <p class="t">Create Table</p>
+    </div>
+    <!-- Left-aligned content: Definition -->
+    <div class="left-container">
+      <p><b>Definition</b></p>
+    </div>
+    <p class="defination">
+      In HTML, a table is used to display tabular data, arranged in rows and
+      columns.
+    </p>
+    <!-- Left-aligned content: Code -->
+    <div class="left-container">
+      <p><b>Code</b></p>
+    </div>
+    <div>
+      <pre class="code-box">
+CREATE TABLE
+        orders (
+            id int auto_increment primary key,
+            user_id INT not null,
+            product VARCHAR(100) NOT NULL,
+            amount double NOT NULL
+        );</pre
+      >
+    </div>
+
+    <!-- Centered button -->
+    <div style="display: flex; justify-content: left; margin-top: 2px">
+      <a href="http://localhost/exp/04_creat_table2.php" class="butt">Run</a>
+    </div>
+  </body>
+</html>

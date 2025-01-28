@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      .to {
+        text-align: center;
+        /* Centers text inside the box */
+        color: rgb(0, 0, 0);
+        font-size: 50px;
+        font-family: "Georgia", serif;
+        max-width: 240px;
+        /* Limits the width of the box */
+        padding: 14px;
+        /* Adds space inside the box */
+        background: bisque;
+        /* White background */
+        border-radius: 10px;
+        /* Rounds the corners */
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        /* Adds shadow for depth */
+        border: 2px solid rgb(7, 1, 0);
+        /* Red border */
+        margin: 0 auto 50px auto;
+      }
+    </style>
+    <link rel="stylesheet" href="cs.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <p class="to">AVERAGE</p>
+    </div>
+    <!-- Left-aligned content: Definition -->
+    <div class="left-container">
+      <p><b>Definition</b></p>
+    </div>
+    <p class="defination">
+      An average query in SQL calculates the average value of a numeric column
+      in a table. This is done using the AVG() aggregate function. The AVG()
+      function sums up all the values in the specified column and divides the
+      total by the number of values.
+    </p>
+    <!-- Left-aligned content: Code -->
+    <div class="left-container">
+      <p><b>Code</b></p>
+    </div>
+    <div>
+      <pre class="code-box">
+SELECT
+        AVG(age) as avg_age
+    FROM
+        users;</pre
+      >
+    </div>
+
+    <!-- Centered button -->
+    <div style="display: flex; justify-content: left; margin-top: 2px">
+      <a href="http://localhost/exp/055_avg.php" class="butt">Run</a>
+    </div>
+  </body>
+</html>

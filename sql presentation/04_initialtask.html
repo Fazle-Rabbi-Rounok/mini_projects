@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="cs.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Initial Task</title>
+    <style>
+      /* General Styles */
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: "Arial", sans-serif;
+        background: linear-gradient(120deg, #075e54, #128c7e);
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        position: relative; /* Required for absolute positioning of the button */
+      }
+
+      .container {
+        max-width: 600px;
+        width: 90%;
+        padding: 30px;
+        background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        border: 1px solid rgba(255, 255, 255, 0.2); /* Light border */
+        animation: fadeIn 1s ease-in-out; /* Fade-in animation */
+      }
+
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      h1 {
+        font-size: 36px;
+        margin-bottom: 30px;
+        color: white;
+        font-family: "Georgia", serif;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+      }
+
+      .button-group {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .button-group a {
+        background: linear-gradient(to right, #1b1b1a, #747372);
+        color: white;
+        border: none;
+        padding: 15px 20px;
+        border-radius: 25px;
+        font-size: 25px;
+        font-family: "Arial", sans-serif;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        text-decoration: none; /* Remove underline */
+        display: block; /* Make the link behave like a block element */
+      }
+
+      .button-group a:hover {
+        background: linear-gradient(to right, #312618, #2c2315);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        transform: translateY(-3px);
+      }
+
+      .button-group a:active {
+        background: linear-gradient(to right, #ff6f00, #ff8f00);
+        transform: translateY(1px);
+        box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+      }
+
+      /* Execute Button */
+      .execute-button {
+        position: absolute; /* Absolute positioning */
+        bottom: 20px; /* Distance from the bottom */
+        right: 20px; /* Distance from the right */
+        padding: 10px 20px;
+        background: linear-gradient(to right, #ff6f00, #ff8f00);
+        color: white;
+        border: none;
+        border-radius: 25px;
+        font-size: 16px;
+        font-family: "Arial", sans-serif;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        text-decoration: none; /* Remove underline */
+      }
+
+      .execute-button:hover {
+        background: linear-gradient(to right, #ff8f00, #ffa726);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        transform: translateY(-3px);
+      }
+
+      .execute-button:active {
+        background: linear-gradient(to right, #ff6f00, #ff8f00);
+        transform: translateY(1px);
+        box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+      }
+
+      /* Footer */
+      footer {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.7);
+        text-align: center;
+      }
+
+      footer a {
+        color: rgba(255, 255, 255, 0.9);
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      footer a:hover {
+        color: #ff8f00;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        h1 {
+          font-size: 28px;
+        }
+
+        .button-group a {
+          font-size: 18px;
+          padding: 12px 15px;
+        }
+
+        .execute-button {
+          font-size: 14px;
+          padding: 8px 16px;
+        }
+
+        footer {
+          font-size: 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Initial Task</h1>
+      <div class="button-group">
+        <a href="http://localhost/exp/01_creat_db.html">Create Database</a>
+        <a href="http://localhost/exp/02_creat_table1.html">Create Table</a>
+        <a href="http://localhost/exp/03_insert_into_user.html"
+          >Insert into</a
+        >
+        <a href="http://localhost/exp/04_creat_table2.html">Create Table_2</a>
+        <a href="http://localhost/exp/05_insert_into_order.html"
+          >Insert into</a
+        >
+      </div>
+    </div>
+
+    <!-- Execute Button -->
+    <a href="http://localhost/exp/03_tableofcontent.html" class="execute-button"
+      >Back</a
+    >
+  </body>
+</html>

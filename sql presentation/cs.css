@@ -1,0 +1,230 @@
+body {
+  background: linear-gradient(
+    120deg,
+    #075e54,
+    #075e54
+  ); /* Gradient background */
+  margin: 10vh;
+  padding: 10px;
+  font-family: Arial, sans-serif;
+  text-align: left; /* Default alignment is left */
+}
+
+/* Center-aligned element */
+
+.t {
+  text-align: center; /* Centers text inside the box */
+  color: rgb(0, 0, 0);
+  font-size: 50px;
+  font-family: "Georgia", serif;
+  max-width: 400px; /* Limits the width of the box */
+  padding: 14px; /* Adds space inside the box */
+  background: bisque; /* White background */
+  border-radius: 10px; /* Rounds the corners */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Adds shadow for depth */
+  border: 2px solid rgb(7, 1, 0); /* Red border */
+  margin: 0 auto 50px auto;
+}
+/* Wrapper for left-aligned content */
+
+/* Styling for left-aligned text */
+.left-container {
+  text-align: left; /* Aligns text to the left */
+  color: rgb(224, 239, 252);
+  font-family: "Georgia", serif;
+  font-size: 30px; /* Font size for smaller text */
+  margin-top: 5px; /* Adds spacing between elements */
+}
+
+/* Box for code */
+.code-box {
+  background: rgb(41, 41, 40); /* Light beige background */
+  font-family: "Courier New", Courier, monospace;
+  color: rgb(255, 255, 255); /* Text color set to black */
+  border: 2px solid #3b3a3a; /* Light gray border */
+  padding: 10px; /* Space inside the box */
+  border-radius: 15px; /* Rounded corners */
+  margin-top: 10px; /* Space above the box */
+  font-size: 20px;
+  text-align: left;
+}
+.defination {
+  color: rgb(3, 3, 3); /* Text color set to black */
+  padding: 10px; /* Space inside the box */
+  margin-top: 10px; /* Space above the box */
+  font-size: 25px;
+  font-family: "Georgia", serif;
+  text-align: left;
+  background: bisque; /* White background */
+  border-radius: 10px; /* Rounds the corners */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Adds shadow for depth */
+  border: 2px solid rgb(7, 1, 0); /* Red border */
+}
+/* Styling for buttons */
+.btn {
+  text-align: left;
+  background-color: #f57f17;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  font-size: 18px;
+  margin-top: 0px; /* Adds space below the code box */
+  margin-bottom: 10px;
+}
+
+.btn:hover {
+  background-color: rgb(241, 197, 49);
+}
+
+table {
+  width: 1000px;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 18px;
+  font-family: "Arial", sans-serif;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+th,
+td {
+  border: red;
+  padding: 12px 20px;
+  text-align: left;
+}
+
+th {
+  background-color: #976404;
+  color: rgb(3, 3, 3);
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+td {
+  background-color: #eed7ac;
+}
+
+tr:nth-child(even) td {
+  background-color: #f3ead0;
+}
+
+tr:hover td {
+  background-color: #8a8888;
+  color: #000;
+}
+.start-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  color: #ffffff;
+  background: #f57f17;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+}
+.butt {
+  position: left;
+  /* Absolute positioning */
+  bottom: 20px;
+  /* Distance from the bottom */
+  right: 20px;
+  /* Distance from the right */
+  padding: 10px 20px;
+  background: linear-gradient(to right, #ff6f00, #ff8f00);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  font-family: "Arial", sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  text-decoration: none;
+  /* Remove underline */
+}
+.butt:hover {
+  background: linear-gradient(to right, #ff8f00, #ffa726);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  transform: translateY(-3px);
+}
+.message {
+  font-size: 28px;
+  /* Larger font size */
+  font-weight: bold;
+  /* Bold text */
+  padding: 20px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  color: rgb(3, 3, 3);
+  /* Green color for success */
+}
+
+.go-home-button {
+  position: absolute;
+  /* Absolute positioning */
+  bottom: 20px;
+  /* Distance from the bottom */
+  right: 20px;
+  /* Distance from the right */
+  padding: 10px 20px;
+  background: linear-gradient(to right, #ff6f00, #ff8f00);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  font-family: "Arial", sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  text-decoration: none;
+  /* Remove underline */
+}
+
+.go-home-button:hover {
+  background: linear-gradient(to right, #ff8f00, #ffa726);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  transform: translateY(-3px);
+}
+
+.go-home-button:active {
+  background: linear-gradient(to right, #ff6f00, #ff8f00);
+  transform: translateY(1px);
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+}
+.go-home {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  background: linear-gradient(to right, #ff6f00, #ff8f00);
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.go-home:hover {
+  background: linear-gradient(to right, #ff8f00, #ffa726);
+  transform: translateY(-2px);
+}
+
+.go-home:active {
+  background: linear-gradient(to right, #ff6f00, #ff8f00);
+  transform: translateY(1px);
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="cs.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <p class="t">Create Table</p>
+    </div>
+    <!-- Left-aligned content: Definition -->
+    <div class="left-container">
+      <p><b>Definition</b></p>
+    </div>
+    <p class="defination">
+      A table in a database is a structured format for organizing and storing
+      data. It consists of rows and columns .
+    </p>
+    <!-- Left-aligned content: Code -->
+    <div class="left-container">
+      <p><b>Code</b></p>
+    </div>
+    <div>
+      <pre class="code-box">
+CREATE TABLE
+        users (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            name VARCHAR(100) NOT NULL,
+            email VARCHAR(100) UNIQUE NOT NULL,
+            age INT NOT NULL
+        );</pre
+      >
+    </div>
+
+    <!-- Centered button -->
+    <div style="display: flex; justify-content: left; margin-top: 2px">
+      <a href="http://localhost/exp/02_create_table.php" class="butt">Run</a>
+    </div>
+  </body>
+</html>

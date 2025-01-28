@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="cs.css" />
+    <style>
+      .butt {
+        position: left;
+        /* Absolute positioning */
+        bottom: 20px;
+        /* Distance from the bottom */
+        right: 20px;
+        /* Distance from the right */
+        padding: 10px 20px;
+        background: linear-gradient(to right, #ff6f00, #ff8f00);
+        color: white;
+        border: none;
+        border-radius: 25px;
+        font-size: 16px;
+        font-family: "Arial", sans-serif;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        text-decoration: none;
+        /* Remove underline */
+      }
+      .butt:hover {
+        background: linear-gradient(to right, #ff8f00, #ffa726);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        transform: translateY(-3px);
+      }
+    </style>
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <p class="t">Create Database</p>
+    </div>
+    <!-- Left-aligned content: Definition -->
+    <div class="left-container">
+      <p><b>Definition</b></p>
+    </div>
+    <p class="defination">
+      A database is an organized collection of data that can be accessed,
+      managed, and updated efficiently. Databases are widely used to store,
+      retrieve, and manipulate data in various applications. They play a crucial
+      role in managing structured and unstructured data.
+    </p>
+    <!-- Left-aligned content: Code -->
+    <div class="left-container">
+      <p><b>Code</b></p>
+    </div>
+    <div>
+      <p class="code-box">CREATE DATABASE IF NOT EXISTS shopping;</p>
+    </div>
+
+    <!-- Centered button -->
+    <div style="display: flex; justify-content: left; margin-top: 2px">
+      <a href="http://localhost/exp/01_creat_db.php " class="butt">Run</a>
+    </div>
+  </body>
+</html>

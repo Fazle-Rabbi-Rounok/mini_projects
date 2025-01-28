@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome to the Presentation</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0; 
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: linear-gradient(120deg, #075e54, #075e54);
+        color: #ffffff;
+        text-align: center;
+      }
+      .welcome-container {
+        max-width: 600px;
+        padding: 20px;
+        background: rgba(0, 0, 0, 0.5);
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 1s ease-out forwards;
+      }
+      @keyframes fadeInUp {
+        0% {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .welcome-container h1 {
+        font-size: 5rem;
+        margin-bottom: 16px;
+        animation: fadeIn 1.5s ease-out 0.5s forwards;
+        opacity: 0;
+      }
+      .welcome-container p {
+        font-size: 1.4rem;
+        margin-bottom: 20px;
+        animation: fadeIn 1.5s ease-out 1s forwards;
+        opacity: 0;
+      }
+
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+
+      .start-button {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 1rem;
+        color: #ffffff;
+        background: #f57f17;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-decoration: none;
+        transition: background 0.3s ease, transform 0.3s ease;
+        animation: fadeIn 1.5s ease-out 1.5s forwards;
+        opacity: 0;
+      }
+
+      .start-button:hover {
+        background: #f3a412;
+        transform: scale(1.05);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="welcome-container">
+      <h1>Welcome!</h1>
+      <p>To our database management presentation.</p>
+      <a href="http://127.0.0.1:5500/02_teamintro.html" class="start-button"
+        >Let's Get Started</a
+      >
+    </div>
+  </body>
+</html>

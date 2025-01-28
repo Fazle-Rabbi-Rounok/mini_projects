@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Table of Content</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: "Arial", sans-serif;
+        background: linear-gradient(120deg, #075e54, #128c7e);
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 1000px;
+        width: 90%;
+        margin: 10px;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        background: transparent; /* Removed white background */
+      }
+
+      h1 {
+        font-size: 36px;
+        margin-bottom: 30px;
+        color: white; /* Changed to white for better contrast */
+        font-family: "Georgia", serif;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+      }
+
+      .content {
+        display: flex;
+        justify-content: space-between;
+        gap: 30px;
+      }
+
+      .section {
+        width: 48%;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+        border-radius: 15px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2); /* Light border */
+      }
+
+      .section h2 {
+        font-size: 24px;
+        color: #ff5722;
+        margin-bottom: 20px;
+        font-family: "Verdana", sans-serif;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+      }
+
+      .button-group {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .button-group button {
+        background: linear-gradient(
+          to right,
+          #f58f0b,
+          #fab041
+        ); /* Black gradient */
+        color: rgb(32, 31, 31);
+        border: none;
+        padding: 12px 20px;
+        border-radius: 25px;
+        font-size: 18px;
+        font-family: "Arial", sans-serif;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        text-align: left;
+      }
+
+      .button-group button:hover {
+        background: linear-gradient(
+          to right,
+          #f78b33,
+          #f09b56
+        ); /* Darker gradient on hover */
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        transform: translateY(-3px);
+      }
+
+      .button-group button:active {
+        background: linear-gradient(
+          to right,
+          #222,
+          #000
+        ); /* Even darker gradient on active */
+        transform: translateY(1px);
+        box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+      }
+
+      /* Style for the start-button class */
+      .start-button {
+        text-decoration: none;
+        color: #ff5722;
+        font-size: 24px;
+        font-family: "Verdana", sans-serif;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        transition: color 0.3s ease;
+      }
+
+      .start-button:hover {
+        color: #e64a19;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Table of Content</h1>
+      <div class="content">
+        <!-- Left Section -->
+        <div class="section">
+          <h2>
+            <a
+              class="start-button"
+              href="http://127.0.0.1:5500/04_initialtask.html"
+              >Initial Task</a
+            >
+          </h2>
+          <div class="button-group">
+            <button>Create Database</button>
+            <button>Create Table</button>
+            <button>Insert into</button>
+            <button>Create Table_2</button>
+            <button>Insert into</button>
+          </div>
+        </div>
+
+        <!-- Right Section -->
+        <div class="section">
+          <h2>
+            <a href="http://127.0.0.1:5500/05_queries.html" class="start-button"
+              >Queries</a
+            >
+          </h2>
+          <div class="button-group">
+            <button>Form</button>
+            <button>Select</button>
+            <button>Select</button>
+            <button>Where</button>
+            <button>Avg</button>
+            <button>Group by</button>
+            <button>Inner join</button>
+            <button>Any</button>
+            <button>Create View</button>
+            <button>Show View</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

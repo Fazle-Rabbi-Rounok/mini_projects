@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple Form</title>
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        background: linear-gradient(120deg, #075e54, #128c7e);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        color: #030303;
+      }
+
+      h2 {
+        text-align: center;
+        color: #0a0a0a;
+        margin-bottom: 20px;
+        font-size: 28px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+      }
+
+      form {
+        background: rgba(255, 255, 255, 0.212);
+        padding: 32px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        max-width: 400px;
+        width: 100%;
+      }
+
+      label {
+        display: block;
+        margin-top: 15px;
+        font-weight: bold;
+        color: #0e0d0d;
+      }
+
+      input[type="text"],
+      input[type="email"],
+      input[type="number"],
+      textarea {
+        width: 100%;
+        padding: 12px;
+        margin-top: 8px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 16px;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      input[type="text"]:focus,
+      input[type="email"]:focus,
+      input[type="number"]:focus,
+      textarea:focus {
+        border-color: #6a11cb;
+        outline: none;
+        box-shadow: 0 0 8px rgba(106, 17, 203, 0.5);
+      }
+
+      button {
+        width: 100%;
+        margin-top: 25px;
+        padding: 12px;
+        background: linear-gradient(135deg, #6a11cb, #2575fc);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.3s ease, transform 0.2s ease;
+      }
+
+      button:hover {
+        background: linear-gradient(135deg, #2575fc, #6a11cb);
+        transform: translateY(-2px);
+      }
+
+      button:active {
+        transform: translateY(0);
+      }
+    </style>
+  </head>
+  <body>
+    <form action="http://localhost/exp/0511_submit.php" method="POST">
+      <h2>New User</h2>
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required />
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required />
+      <label for="age">Age:</label>
+      <input type="number" id="age" name="age" required />
+      <button type="submit">Sign Up</button>
+    </form>
+  </body>
+</html>

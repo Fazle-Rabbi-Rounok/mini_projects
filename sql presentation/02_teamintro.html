@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="cs.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Team Introduction</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: "Arial", sans-serif;
+        background: linear-gradient(120deg, #075e54, #075e54);
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        overflow: hidden;
+        text-align: center;
+      }
+      .container {
+        width: 100%;
+        max-width: 1200px;
+        padding: 20px;
+        background:linear-gradient(120deg, #ffffff, #f1f4ba);
+        border-radius: 15px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        color: #333;
+      }
+      h1 {
+        text-align: left;
+        font-size: 40px;
+        margin-bottom: 10px;
+        color: #148df7;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        position: relative;
+        opacity: 0;
+        animation: slideIn 1s forwards, fireEffect 2s forwards,
+          returnToNormal 1s 2s forwards;
+      }
+      h2 {
+        font-size: 20px;
+        margin-bottom: 30px;
+        color: #555;
+      }
+      .team {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 30px;
+      }
+      .team-member {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        opacity: 0;
+        transform: translateY(50px);
+        transition: all 0.8s ease-in-out;
+      }
+      .team-member img {
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        margin-bottom: 10px;
+      }
+      .team-member .name {
+        font-size: 18px;
+        font-weight: bold;
+        color: #1e88e5;
+      }
+
+      @keyframes slideIn {
+        0% {
+          opacity: 0;
+          transform: translateY(-50px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fireEffect {
+        0% {
+          color: #fff;
+          text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000, 0 0 20px #ff0000,
+            0 0 40px #ff6600, 0 0 80px #ff6600;
+        }
+        100% {
+          color: #ff6600;
+          text-shadow: 0 0 5px #ff6600, 0 0 10px #ff6600, 0 0 20px #ff6600,
+            0 0 40px #ff0000, 0 0 80px #ff0000;
+        }
+      }
+
+      @keyframes returnToNormal {
+        0% {
+          color: #fff;
+          text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000, 0 0 20px #ff0000,
+            0 0 40px #ff6600, 0 0 80px #ff6600;
+        }
+        100% {
+          color: #1e88e5;
+          text-shadow: none;
+        }
+      }
+
+      @keyframes fromLeft {
+        0% {
+          opacity: 0;
+          transform: translateX(-100px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes fromRight {
+        0% {
+          opacity: 0;
+          transform: translateX(100px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes fromBottom {
+        0% {
+          opacity: 0;
+          transform: translateY(100px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .buttonn {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 1rem;
+        color: #ffffff;
+        background: #f78119;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+      }
+
+      .buttonn:hover {
+        background-color: rgb(241, 197, 49);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>
+        <pre>
+          ~FrontEnd Fitfat~
+                         ~BackEnd ShodorGhat~</pre
+        >
+      </h1>
+      <h2>Presented By</h2>
+      <div class="team">
+        <div
+          class="team-member"
+          style="animation: fromLeft 1s ease-out 0.5s forwards"
+        >
+          <img src="r.jpg" alt="Member 1" />
+          <div class="name">Fazle Rabbi Rounok</div>
+        </div>
+        <div
+          class="team-member"
+          style="animation: fromLeft 1s ease-out 1s forwards"
+        >
+          <img src="j.jpg" alt="Member 2" />
+          <div class="name">Atik Shahriar Jisan</div>
+        </div>
+        <div
+          class="team-member"
+          style="animation: fromLeft 1s ease-out 1.5s forwards"
+        >
+          <img src="f.jpg" alt="Member 5" />
+          <div class="name">Fawziya Farzana Mim</div>
+        </div>
+        <div
+          class="team-member"
+          style="animation: fromLeft 1s ease-out 2s forwards"
+        >
+          <img src="d.jpg" alt="Member 3" />
+          <div class="name">Nr.Durjoy</div>
+        </div>
+        <div
+          class="team-member"
+          style="animation: fromLeft 1s ease-out 2.5s forwards"
+        >
+          <img src="m.jpg" alt="Member 4" />
+          <div class="name">Mehedi Hasan</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <a href="http://127.0.0.1:5500/03_tableofcontent.html" class="buttonn"
+        >Next</a
+      >
+    </div>
+  </body>
+</html>
